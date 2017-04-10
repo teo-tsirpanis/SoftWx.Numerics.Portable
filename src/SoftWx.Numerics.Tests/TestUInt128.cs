@@ -1,7 +1,9 @@
 ﻿// Copyright ©2016 SoftWx, Inc.
 // Released under the MIT License the text of which appears at the end of this file.
 // <authors> Steve Hatchett
+
 using NUnit.Framework;
+// ReSharper disable EqualExpressionComparison
 
 namespace SoftWx.Numerics.Tests {
     /// <summary></summary>
@@ -31,9 +33,9 @@ namespace SoftWx.Numerics.Tests {
         }
         [Test]
         public void RoundTripUlongCastShouldReturnOriginal() {
-            ulong expected = ulong.MaxValue / 3;
+            const ulong expected = ulong.MaxValue / 3;
             UInt128 intermediate = expected;
-            ulong final = (ulong)intermediate;
+            var final = (ulong)intermediate;
             Assert.AreEqual(expected, final);
         }
         [Test]
@@ -121,7 +123,7 @@ namespace SoftWx.Numerics.Tests {
         [Test]
         public void SubtractOperatorShouldHandleUnderflow() {
             var expected = new UInt128(ulong.MaxValue, ulong.MaxValue);
-            var actual = unchecked(new UInt128(0, 9) - new UInt128(0, 10));
+            var actual = new UInt128(0, 9) - new UInt128(0, 10);
             Assert.AreEqual(expected, actual);
         }
         [Test]

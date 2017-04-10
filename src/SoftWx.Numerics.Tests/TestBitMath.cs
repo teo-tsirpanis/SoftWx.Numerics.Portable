@@ -10,69 +10,69 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void LowBit0ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.LowBit((byte)0), "byte");
-            Assert.AreEqual(0, BitMath.LowBit((sbyte)0), "sbyte");
-            Assert.AreEqual(0, BitMath.LowBit((ushort)0), "ushort");
-            Assert.AreEqual(0, BitMath.LowBit((short)0), "short");
-            Assert.AreEqual(0, BitMath.LowBit((uint)0), "uint");
-            Assert.AreEqual(0, BitMath.LowBit((int)0), "int");
-            Assert.AreEqual(0, BitMath.LowBit((ulong)0), "ulong");
-            Assert.AreEqual(0, BitMath.LowBit((long)0), "long");
-            Assert.AreEqual(UInt128.Zero, BitMath.LowBit((UInt128)0), "UInt128");
+            Assert.AreEqual(0, ((byte)0).LowBit(), "byte");
+            Assert.AreEqual(0, ((sbyte)0).LowBit(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0).LowBit(), "ushort");
+            Assert.AreEqual(0, ((short)0).LowBit(), "short");
+            Assert.AreEqual(0, ((uint)0).LowBit(), "uint");
+            Assert.AreEqual(0, 0.LowBit(), "int");
+            Assert.AreEqual(0, ((ulong)0).LowBit(), "ulong");
+            Assert.AreEqual(0, ((long)0).LowBit(), "long");
+            Assert.AreEqual(UInt128.Zero, ((UInt128)0).LowBit(), "UInt128");
         }
 
         [Test]
         public void LowBit1ShouldReturn1() {
-            Assert.AreEqual(1, BitMath.LowBit((byte)1), "byte");
-            Assert.AreEqual(1, BitMath.LowBit((sbyte)1), "sbyte");
-            Assert.AreEqual(1, BitMath.LowBit((ushort)1), "ushort");
-            Assert.AreEqual(1, BitMath.LowBit((short)1), "short");
-            Assert.AreEqual(1, BitMath.LowBit((uint)1), "uint");
-            Assert.AreEqual(1, BitMath.LowBit((int)1), "int");
-            Assert.AreEqual(1, BitMath.LowBit((ulong)1), "ulong");
-            Assert.AreEqual(1, BitMath.LowBit((long)1), "long");
-            Assert.AreEqual(UInt128.One, BitMath.LowBit((UInt128)1), "UInt128");
+            Assert.AreEqual(1, ((byte)1).LowBit(), "byte");
+            Assert.AreEqual(1, ((sbyte)1).LowBit(), "sbyte");
+            Assert.AreEqual(1, ((ushort)1).LowBit(), "ushort");
+            Assert.AreEqual(1, ((short)1).LowBit(), "short");
+            Assert.AreEqual(1, ((uint)1).LowBit(), "uint");
+            Assert.AreEqual(1, 1.LowBit(), "int");
+            Assert.AreEqual(1, ((ulong)1).LowBit(), "ulong");
+            Assert.AreEqual(1, ((long)1).LowBit(), "long");
+            Assert.AreEqual(UInt128.One, ((UInt128)1).LowBit(), "UInt128");
         }
 
         [Test]
         public void LowBitAllBitsSetShouldReturn1() {
-            Assert.AreEqual(1, BitMath.LowBit((byte)0xff), "byte");
-            Assert.AreEqual(1, BitMath.LowBit((sbyte)-1), "sbyte");
-            Assert.AreEqual(1, BitMath.LowBit((ushort)0xffff), "ushort");
-            Assert.AreEqual(1, BitMath.LowBit((short)-1), "short");
-            Assert.AreEqual(1, BitMath.LowBit((uint)0xffffffff), "uint");
-            Assert.AreEqual(1, BitMath.LowBit((int)-1), "int");
-            Assert.AreEqual(1, BitMath.LowBit((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(1, BitMath.LowBit((long)-1), "long");
-            Assert.AreEqual(UInt128.One, BitMath.LowBit(UInt128.MaxValue));
+            Assert.AreEqual(1, ((byte)0xff).LowBit(), "byte");
+            Assert.AreEqual(1, ((sbyte)-1).LowBit(), "sbyte");
+            Assert.AreEqual(1, ((ushort)0xffff).LowBit(), "ushort");
+            Assert.AreEqual(1, ((short)-1).LowBit(), "short");
+            Assert.AreEqual(1, 0xffffffff.LowBit(), "uint");
+            Assert.AreEqual(1, (-1).LowBit(), "int");
+            Assert.AreEqual(1, 0xffffffffffffffff.LowBit(), "ulong");
+            Assert.AreEqual(1, ((long)-1).LowBit(), "long");
+            Assert.AreEqual(UInt128.One, UInt128.MaxValue.LowBit());
         }
 
         [Test]
         public void LowBitAllBitsMinus1ShouldReturn2() {
-            Assert.AreEqual(2, BitMath.LowBit((byte)0xfe), "byte");
-            Assert.AreEqual(2, BitMath.LowBit((sbyte)-2), "sbyte");
-            Assert.AreEqual(2, BitMath.LowBit((ushort)0xfffe), "ushort");
-            Assert.AreEqual(2, BitMath.LowBit((short)-2), "short");
-            Assert.AreEqual(2, BitMath.LowBit((uint)0xfffffffe), "uint");
-            Assert.AreEqual(2, BitMath.LowBit((int)-2), "int");
-            Assert.AreEqual(2, BitMath.LowBit((ulong)0xfffffffffffffffe), "ulong");
-            Assert.AreEqual(2, BitMath.LowBit((long)-2), "long");
-            Assert.AreEqual((UInt128)2, BitMath.LowBit(new UInt128(0xffffffffffffffff, 0xfffffffffffffffe)), "UInt128");
+            Assert.AreEqual(2, ((byte)0xfe).LowBit(), "byte");
+            Assert.AreEqual(2, ((sbyte)-2).LowBit(), "sbyte");
+            Assert.AreEqual(2, ((ushort)0xfffe).LowBit(), "ushort");
+            Assert.AreEqual(2, ((short)-2).LowBit(), "short");
+            Assert.AreEqual(2, 0xfffffffe.LowBit(), "uint");
+            Assert.AreEqual(2, (-2).LowBit(), "int");
+            Assert.AreEqual(2, 0xfffffffffffffffe.LowBit(), "ulong");
+            Assert.AreEqual(2, ((long)-2).LowBit(), "long");
+            Assert.AreEqual((UInt128)2, new UInt128(0xffffffffffffffff, 0xfffffffffffffffe).LowBit(), "UInt128");
         }
 
         [Test]
         public void LowBitByteShouldMatchWider() {
             byte v = byte.MinValue;
             while(true) {
-                byte expected = BitMath.LowBit(v);
-                Assert.AreEqual(unchecked((sbyte)expected), BitMath.LowBit(unchecked((sbyte)v)), "sbyte");
-                Assert.AreEqual((ushort)expected, BitMath.LowBit((ushort)v), "ushort");
-                Assert.AreEqual((short)expected, BitMath.LowBit((short)v), "short");
-                Assert.AreEqual((uint)expected, BitMath.LowBit((uint)v), "uint");
-                Assert.AreEqual((int)expected, BitMath.LowBit((int)v), "int");
-                Assert.AreEqual((ulong)expected, BitMath.LowBit((ulong)v), "ulong");
-                Assert.AreEqual((long)expected, BitMath.LowBit((long)v), "long");
-                Assert.AreEqual((UInt128)expected, BitMath.LowBit((UInt128)v), "UInt128");
+                byte expected = v.LowBit();
+                Assert.AreEqual(unchecked((sbyte)expected), unchecked((sbyte)v).LowBit(), "sbyte");
+                Assert.AreEqual((ushort)expected, ((ushort)v).LowBit(), "ushort");
+                Assert.AreEqual((short)expected, ((short)v).LowBit(), "short");
+                Assert.AreEqual((uint)expected, ((uint)v).LowBit(), "uint");
+                Assert.AreEqual((int)expected, ((int)v).LowBit(), "int");
+                Assert.AreEqual((ulong)expected, ((ulong)v).LowBit(), "ulong");
+                Assert.AreEqual((long)expected, ((long)v).LowBit(), "long");
+                Assert.AreEqual((UInt128)expected, ((UInt128)v).LowBit(), "UInt128");
                 if (v == byte.MaxValue) break;
                 v++;
             }
@@ -80,56 +80,56 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void HighBit0ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.HighBit((byte)0), "byte");
-            Assert.AreEqual(0, BitMath.HighBit((sbyte)0), "sbyte");
-            Assert.AreEqual(0, BitMath.HighBit((ushort)0), "ushort");
-            Assert.AreEqual(0, BitMath.HighBit((short)0), "short");
-            Assert.AreEqual(0, BitMath.HighBit((uint)0), "uint");
-            Assert.AreEqual(0, BitMath.HighBit((int)0), "int");
-            Assert.AreEqual(0, BitMath.HighBit((ulong)0), "ulong");
-            Assert.AreEqual(0, BitMath.HighBit((long)0), "long");
-            Assert.AreEqual(UInt128.Zero, BitMath.HighBit((UInt128)0), "UInt128");
+            Assert.AreEqual(0, ((byte)0).HighBit(), "byte");
+            Assert.AreEqual(0, ((sbyte)0).HighBit(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0).HighBit(), "ushort");
+            Assert.AreEqual(0, ((short)0).HighBit(), "short");
+            Assert.AreEqual(0, ((uint)0).HighBit(), "uint");
+            Assert.AreEqual(0, 0.HighBit(), "int");
+            Assert.AreEqual(0, ((ulong)0).HighBit(), "ulong");
+            Assert.AreEqual(0, ((long)0).HighBit(), "long");
+            Assert.AreEqual(UInt128.Zero, ((UInt128)0).HighBit(), "UInt128");
         }
 
         [Test]
         public void HighBit1ShouldReturn1() {
-            Assert.AreEqual(1, BitMath.HighBit((byte)1), "byte");
-            Assert.AreEqual(1, BitMath.HighBit((sbyte)1), "sbyte");
-            Assert.AreEqual(1, BitMath.HighBit((ushort)1), "ushort");
-            Assert.AreEqual(1, BitMath.HighBit((short)1), "short");
-            Assert.AreEqual(1, BitMath.HighBit((uint)1), "uint");
-            Assert.AreEqual(1, BitMath.HighBit((int)1), "int");
-            Assert.AreEqual(1, BitMath.HighBit((ulong)1), "ulong");
-            Assert.AreEqual(1, BitMath.HighBit((long)1), "long");
-            Assert.AreEqual(UInt128.One, BitMath.HighBit((UInt128)1), "UInt128");
+            Assert.AreEqual(1, ((byte)1).HighBit(), "byte");
+            Assert.AreEqual(1, ((sbyte)1).HighBit(), "sbyte");
+            Assert.AreEqual(1, ((ushort)1).HighBit(), "ushort");
+            Assert.AreEqual(1, ((short)1).HighBit(), "short");
+            Assert.AreEqual(1, ((uint)1).HighBit(), "uint");
+            Assert.AreEqual(1, 1.HighBit(), "int");
+            Assert.AreEqual(1, ((ulong)1).HighBit(), "ulong");
+            Assert.AreEqual(1, ((long)1).HighBit(), "long");
+            Assert.AreEqual(UInt128.One, ((UInt128)1).HighBit(), "UInt128");
         }
 
         [Test]
         public void HighBitAllBitsSetShouldReturnMsb() {
-            Assert.AreEqual(0x80, BitMath.HighBit((byte)0xff), "byte");
-            Assert.AreEqual(sbyte.MinValue, BitMath.HighBit((sbyte)-1), "sbyte");
-            Assert.AreEqual(0x8000, BitMath.HighBit((ushort)0xffff), "ushort");
-            Assert.AreEqual(short.MinValue, BitMath.HighBit((short)-1), "short");
-            Assert.AreEqual(0x80000000, BitMath.HighBit((uint)0xffffffff), "uint");
-            Assert.AreEqual(int.MinValue, BitMath.HighBit((int)-1), "int");
-            Assert.AreEqual(0x8000000000000000, BitMath.HighBit((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(long.MinValue, BitMath.HighBit((long)-1), "long");
-            Assert.AreEqual(new UInt128(0x8000000000000000, 0), BitMath.HighBit(UInt128.MaxValue));
+            Assert.AreEqual(0x80, ((byte)0xff).HighBit(), "byte");
+            Assert.AreEqual(sbyte.MinValue, ((sbyte)-1).HighBit(), "sbyte");
+            Assert.AreEqual(0x8000, ((ushort)0xffff).HighBit(), "ushort");
+            Assert.AreEqual(short.MinValue, ((short)-1).HighBit(), "short");
+            Assert.AreEqual(0x80000000, 0xffffffff.HighBit(), "uint");
+            Assert.AreEqual(int.MinValue, (-1).HighBit(), "int");
+            Assert.AreEqual(0x8000000000000000, 0xffffffffffffffff.HighBit(), "ulong");
+            Assert.AreEqual(long.MinValue, ((long)-1).HighBit(), "long");
+            Assert.AreEqual(new UInt128(0x8000000000000000, 0), UInt128.MaxValue.HighBit());
         }
 
         [Test]
         public void HighBitByteShouldMatchWider() {
             byte v = byte.MinValue;
             while (true) {
-                byte expected = BitMath.HighBit(v);
-                Assert.AreEqual(unchecked((sbyte)expected), BitMath.HighBit(unchecked((sbyte)v)), "sbyte");
-                Assert.AreEqual((ushort)expected, BitMath.HighBit((ushort)v), "ushort");
-                Assert.AreEqual((short)expected, BitMath.HighBit((short)v), "short");
-                Assert.AreEqual((uint)expected, BitMath.HighBit((uint)v), "uint");
-                Assert.AreEqual((int)expected, BitMath.HighBit((int)v), "int");
-                Assert.AreEqual((ulong)expected, BitMath.HighBit((ulong)v), "ulong");
-                Assert.AreEqual((long)expected, BitMath.HighBit((long)v), "long");
-                Assert.AreEqual((UInt128)expected, BitMath.HighBit((UInt128)v), "UInt128");
+                byte expected = v.HighBit();
+                Assert.AreEqual(unchecked((sbyte)expected), unchecked((sbyte)v).HighBit(), "sbyte");
+                Assert.AreEqual((ushort)expected, ((ushort)v).HighBit(), "ushort");
+                Assert.AreEqual((short)expected, ((short)v).HighBit(), "short");
+                Assert.AreEqual((uint)expected, ((uint)v).HighBit(), "uint");
+                Assert.AreEqual((int)expected, ((int)v).HighBit(), "int");
+                Assert.AreEqual((ulong)expected, ((ulong)v).HighBit(), "ulong");
+                Assert.AreEqual((long)expected, ((long)v).HighBit(), "long");
+                Assert.AreEqual((UInt128)expected, ((UInt128)v).HighBit(), "UInt128");
                 if (v == byte.MaxValue) break;
                 v++;
             }
@@ -137,69 +137,69 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void LowBitPosition0ShouldReturnNeg1() {
-            Assert.AreEqual(-1, BitMath.LowBitPosition((byte)0), "byte");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((sbyte)0), "sbyte");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((ushort)0), "ushort");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((short)0), "short");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((uint)0), "uint");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((int)0), "int");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((ulong)0), "ulong");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((long)0), "long");
-            Assert.AreEqual(-1, BitMath.LowBitPosition((UInt128)0), "UInt128");
+            Assert.AreEqual(-1, ((byte)0).LowBitPosition(), "byte");
+            Assert.AreEqual(-1, ((sbyte)0).LowBitPosition(), "sbyte");
+            Assert.AreEqual(-1, ((ushort)0).LowBitPosition(), "ushort");
+            Assert.AreEqual(-1, ((short)0).LowBitPosition(), "short");
+            Assert.AreEqual(-1, ((uint)0).LowBitPosition(), "uint");
+            Assert.AreEqual(-1, 0.LowBitPosition(), "int");
+            Assert.AreEqual(-1, ((ulong)0).LowBitPosition(), "ulong");
+            Assert.AreEqual(-1, ((long)0).LowBitPosition(), "long");
+            Assert.AreEqual(-1, ((UInt128)0).LowBitPosition(), "UInt128");
         }
 
         [Test]
         public void LowBitPosition1ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.LowBitPosition((byte)1), "byte");
-            Assert.AreEqual(0, BitMath.LowBitPosition((sbyte)1), "sbyte");
-            Assert.AreEqual(0, BitMath.LowBitPosition((ushort)1), "ushort");
-            Assert.AreEqual(0, BitMath.LowBitPosition((short)1), "short");
-            Assert.AreEqual(0, BitMath.LowBitPosition((uint)1), "uint");
-            Assert.AreEqual(0, BitMath.LowBitPosition((int)1), "int");
-            Assert.AreEqual(0, BitMath.LowBitPosition((ulong)1), "ulong");
-            Assert.AreEqual(0, BitMath.LowBitPosition((long)1), "long");
-            Assert.AreEqual(0, BitMath.LowBitPosition((UInt128)1), "UInt128");
+            Assert.AreEqual(0, ((byte)1).LowBitPosition(), "byte");
+            Assert.AreEqual(0, ((sbyte)1).LowBitPosition(), "sbyte");
+            Assert.AreEqual(0, ((ushort)1).LowBitPosition(), "ushort");
+            Assert.AreEqual(0, ((short)1).LowBitPosition(), "short");
+            Assert.AreEqual(0, ((uint)1).LowBitPosition(), "uint");
+            Assert.AreEqual(0, 1.LowBitPosition(), "int");
+            Assert.AreEqual(0, ((ulong)1).LowBitPosition(), "ulong");
+            Assert.AreEqual(0, ((long)1).LowBitPosition(), "long");
+            Assert.AreEqual(0, ((UInt128)1).LowBitPosition(), "UInt128");
         }
 
         [Test]
         public void LowBitPositionAllBitsSetShouldReturn0() {
-            Assert.AreEqual(0, BitMath.LowBitPosition((byte)0xff), "byte");
-            Assert.AreEqual(0, BitMath.LowBitPosition((sbyte)-1), "sbyte");
-            Assert.AreEqual(0, BitMath.LowBitPosition((ushort)0xffff), "ushort");
-            Assert.AreEqual(0, BitMath.LowBitPosition((short)-1), "short");
-            Assert.AreEqual(0, BitMath.LowBitPosition((uint)0xffffffff), "uint");
-            Assert.AreEqual(0, BitMath.LowBitPosition((int)-1), "int");
-            Assert.AreEqual(0, BitMath.LowBitPosition((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(0, BitMath.LowBitPosition((long)-1), "long");
-            Assert.AreEqual(0, BitMath.LowBitPosition(UInt128.MaxValue));
+            Assert.AreEqual(0, ((byte)0xff).LowBitPosition(), "byte");
+            Assert.AreEqual(0, ((sbyte)-1).LowBitPosition(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0xffff).LowBitPosition(), "ushort");
+            Assert.AreEqual(0, ((short)-1).LowBitPosition(), "short");
+            Assert.AreEqual(0, 0xffffffff.LowBitPosition(), "uint");
+            Assert.AreEqual(0, (-1).LowBitPosition(), "int");
+            Assert.AreEqual(0, 0xffffffffffffffff.LowBitPosition(), "ulong");
+            Assert.AreEqual(0, ((long)-1).LowBitPosition(), "long");
+            Assert.AreEqual(0, UInt128.MaxValue.LowBitPosition());
         }
 
         [Test]
         public void LowBitPositionAllBitsMinus11ShouldReturn1() {
-            Assert.AreEqual(1, BitMath.LowBitPosition((byte)0xfe), "byte");
-            Assert.AreEqual(1, BitMath.LowBitPosition((sbyte)-2), "sbyte");
-            Assert.AreEqual(1, BitMath.LowBitPosition((ushort)0xfffe), "ushort");
-            Assert.AreEqual(1, BitMath.LowBitPosition((short)-2), "short");
-            Assert.AreEqual(1, BitMath.LowBitPosition((uint)0xfffffffe), "uint");
-            Assert.AreEqual(1, BitMath.LowBitPosition((int)-2), "int");
-            Assert.AreEqual(1, BitMath.LowBitPosition((ulong)0xfffffffffffffffe), "ulong");
-            Assert.AreEqual(1, BitMath.LowBitPosition((long)-2), "long");
-            Assert.AreEqual(1, BitMath.LowBitPosition(new UInt128(0xffffffffffffffff, 0xfffffffffffffffe)), "UInt128");
+            Assert.AreEqual(1, ((byte)0xfe).LowBitPosition(), "byte");
+            Assert.AreEqual(1, ((sbyte)-2).LowBitPosition(), "sbyte");
+            Assert.AreEqual(1, ((ushort)0xfffe).LowBitPosition(), "ushort");
+            Assert.AreEqual(1, ((short)-2).LowBitPosition(), "short");
+            Assert.AreEqual(1, 0xfffffffe.LowBitPosition(), "uint");
+            Assert.AreEqual(1, (-2).LowBitPosition(), "int");
+            Assert.AreEqual(1, 0xfffffffffffffffe.LowBitPosition(), "ulong");
+            Assert.AreEqual(1, ((long)-2).LowBitPosition(), "long");
+            Assert.AreEqual(1, new UInt128(0xffffffffffffffff, 0xfffffffffffffffe).LowBitPosition(), "UInt128");
         }
 
         [Test]
         public void LowBitPositionByteShouldMatchWider() {
             byte v = byte.MinValue;
             while (true) {
-                int expected = BitMath.LowBitPosition(v);
-                Assert.AreEqual(expected, BitMath.LowBitPosition(unchecked((sbyte)v)), "sbyte");
-                Assert.AreEqual(expected, BitMath.LowBitPosition((ushort)v), "short");
-                Assert.AreEqual(expected, BitMath.LowBitPosition((short)v), "short");
-                Assert.AreEqual(expected, BitMath.LowBitPosition((uint)v), "uint");
-                Assert.AreEqual(expected, BitMath.LowBitPosition((int)v), "int");
-                Assert.AreEqual(expected, BitMath.LowBitPosition((ulong)v), "ulong");
-                Assert.AreEqual(expected, BitMath.LowBitPosition((long)v), "long");
-                Assert.AreEqual(expected, BitMath.LowBitPosition((UInt128)v), "UInt128");
+                int expected = v.LowBitPosition();
+                Assert.AreEqual(expected, unchecked((sbyte)v).LowBitPosition(), "sbyte");
+                Assert.AreEqual(expected, ((ushort)v).LowBitPosition(), "short");
+                Assert.AreEqual(expected, ((short)v).LowBitPosition(), "short");
+                Assert.AreEqual(expected, ((uint)v).LowBitPosition(), "uint");
+                Assert.AreEqual(expected, ((int)v).LowBitPosition(), "int");
+                Assert.AreEqual(expected, ((ulong)v).LowBitPosition(), "ulong");
+                Assert.AreEqual(expected, ((long)v).LowBitPosition(), "long");
+                Assert.AreEqual(expected, ((UInt128)v).LowBitPosition(), "UInt128");
                 if (v == byte.MaxValue) break;
                 v++;
             }
@@ -207,56 +207,56 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void HighBitPosition0ShouldReturnNeg1() {
-            Assert.AreEqual(-1, BitMath.HighBitPosition((byte)0), "byte");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((sbyte)0), "sbyte");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((ushort)0), "ushort");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((short)0), "short");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((uint)0), "uint");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((int)0), "int");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((ulong)0), "ulong");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((long)0), "long");
-            Assert.AreEqual(-1, BitMath.HighBitPosition((UInt128)0), "UInt128");
+            Assert.AreEqual(-1, ((byte)0).HighBitPosition(), "byte");
+            Assert.AreEqual(-1, ((sbyte)0).HighBitPosition(), "sbyte");
+            Assert.AreEqual(-1, ((ushort)0).HighBitPosition(), "ushort");
+            Assert.AreEqual(-1, ((short)0).HighBitPosition(), "short");
+            Assert.AreEqual(-1, ((uint)0).HighBitPosition(), "uint");
+            Assert.AreEqual(-1, 0.HighBitPosition(), "int");
+            Assert.AreEqual(-1, ((ulong)0).HighBitPosition(), "ulong");
+            Assert.AreEqual(-1, ((long)0).HighBitPosition(), "long");
+            Assert.AreEqual(-1, ((UInt128)0).HighBitPosition(), "UInt128");
         }
 
         [Test]
         public void HighBitPosition1ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.HighBitPosition((byte)1), "byte");
-            Assert.AreEqual(0, BitMath.HighBitPosition((sbyte)1), "sbyte");
-            Assert.AreEqual(0, BitMath.HighBitPosition((ushort)1), "ushort");
-            Assert.AreEqual(0, BitMath.HighBitPosition((short)1), "short");
-            Assert.AreEqual(0, BitMath.HighBitPosition((uint)1), "uint");
-            Assert.AreEqual(0, BitMath.HighBitPosition((int)1), "int");
-            Assert.AreEqual(0, BitMath.HighBitPosition((ulong)1), "ulong");
-            Assert.AreEqual(0, BitMath.HighBitPosition((long)1), "long");
-            Assert.AreEqual(0, BitMath.HighBitPosition((UInt128)1), "UInt128");
+            Assert.AreEqual(0, ((byte)1).HighBitPosition(), "byte");
+            Assert.AreEqual(0, ((sbyte)1).HighBitPosition(), "sbyte");
+            Assert.AreEqual(0, ((ushort)1).HighBitPosition(), "ushort");
+            Assert.AreEqual(0, ((short)1).HighBitPosition(), "short");
+            Assert.AreEqual(0, ((uint)1).HighBitPosition(), "uint");
+            Assert.AreEqual(0, 1.HighBitPosition(), "int");
+            Assert.AreEqual(0, ((ulong)1).HighBitPosition(), "ulong");
+            Assert.AreEqual(0, ((long)1).HighBitPosition(), "long");
+            Assert.AreEqual(0, ((UInt128)1).HighBitPosition(), "UInt128");
         }
 
         [Test]
         public void HighBitPositionAllBitsSetShouldReturnMsbPos() {
-            Assert.AreEqual(7, BitMath.HighBitPosition((byte)0xff), "byte");
-            Assert.AreEqual(7, BitMath.HighBitPosition((sbyte)-1), "sbyte");
-            Assert.AreEqual(15, BitMath.HighBitPosition((ushort)0xffff), "ushort");
-            Assert.AreEqual(15, BitMath.HighBitPosition((short)-1), "short");
-            Assert.AreEqual(31, BitMath.HighBitPosition((uint)0xffffffff), "uint");
-            Assert.AreEqual(31, BitMath.HighBitPosition((int)-1), "int");
-            Assert.AreEqual(63, BitMath.HighBitPosition((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(63, BitMath.HighBitPosition((long)-1), "long");
-            Assert.AreEqual(127, BitMath.HighBitPosition(new UInt128(0xffffffffffffffff, 0xffffffffffffffff)), "UInt128");
+            Assert.AreEqual(7, ((byte)0xff).HighBitPosition(), "byte");
+            Assert.AreEqual(7, ((sbyte)-1).HighBitPosition(), "sbyte");
+            Assert.AreEqual(15, ((ushort)0xffff).HighBitPosition(), "ushort");
+            Assert.AreEqual(15, ((short)-1).HighBitPosition(), "short");
+            Assert.AreEqual(31, 0xffffffff.HighBitPosition(), "uint");
+            Assert.AreEqual(31, (-1).HighBitPosition(), "int");
+            Assert.AreEqual(63, 0xffffffffffffffff.HighBitPosition(), "ulong");
+            Assert.AreEqual(63, ((long)-1).HighBitPosition(), "long");
+            Assert.AreEqual(127, new UInt128(0xffffffffffffffff, 0xffffffffffffffff).HighBitPosition(), "UInt128");
         }
 
         [Test]
         public void HighBitPositionByteShouldMatchWider() {
             byte v = byte.MinValue;
             while (true) {
-                int expected = BitMath.HighBitPosition(v);
-                Assert.AreEqual(expected, BitMath.HighBitPosition(unchecked((sbyte)v)), "sbyte");
-                Assert.AreEqual(expected, BitMath.HighBitPosition((ushort)v), "ushort");
-                Assert.AreEqual(expected, BitMath.HighBitPosition((short)v), "short");
-                Assert.AreEqual(expected, BitMath.HighBitPosition((uint)v), "uint");
-                Assert.AreEqual(expected, BitMath.HighBitPosition((int)v), "int");
-                Assert.AreEqual(expected, BitMath.HighBitPosition((ulong)v), "ulong");
-                Assert.AreEqual(expected, BitMath.HighBitPosition((long)v), "long");
-                Assert.AreEqual(expected, BitMath.HighBitPosition((UInt128)v), "UInt128");
+                int expected = v.HighBitPosition();
+                Assert.AreEqual(expected, unchecked((sbyte)v).HighBitPosition(), "sbyte");
+                Assert.AreEqual(expected, ((ushort)v).HighBitPosition(), "ushort");
+                Assert.AreEqual(expected, ((short)v).HighBitPosition(), "short");
+                Assert.AreEqual(expected, ((uint)v).HighBitPosition(), "uint");
+                Assert.AreEqual(expected, ((int)v).HighBitPosition(), "int");
+                Assert.AreEqual(expected, ((ulong)v).HighBitPosition(), "ulong");
+                Assert.AreEqual(expected, ((long)v).HighBitPosition(), "long");
+                Assert.AreEqual(expected, ((UInt128)v).HighBitPosition(), "UInt128");
                 if (v == byte.MaxValue) break;
                 v++;
             }
@@ -264,72 +264,72 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void TrailingZeroBits0ShouldReturnBitWidth() {
-            Assert.AreEqual(8, BitMath.TrailingZeroBits((byte)0), "byte");
-            Assert.AreEqual(8, BitMath.TrailingZeroBits((sbyte)0), "sbyte");
-            Assert.AreEqual(16, BitMath.TrailingZeroBits((ushort)0), "ushort");
-            Assert.AreEqual(16, BitMath.TrailingZeroBits((short)0), "short");
-            Assert.AreEqual(32, BitMath.TrailingZeroBits((uint)0), "uint");
-            Assert.AreEqual(32, BitMath.TrailingZeroBits((int)0), "int");
-            Assert.AreEqual(64, BitMath.TrailingZeroBits((ulong)0), "ulong");
-            Assert.AreEqual(64, BitMath.TrailingZeroBits((long)0), "long");
-            Assert.AreEqual(128, BitMath.TrailingZeroBits((UInt128)0), "UInt128");
+            Assert.AreEqual(8, ((byte)0).TrailingZeroBits(), "byte");
+            Assert.AreEqual(8, ((sbyte)0).TrailingZeroBits(), "sbyte");
+            Assert.AreEqual(16, ((ushort)0).TrailingZeroBits(), "ushort");
+            Assert.AreEqual(16, ((short)0).TrailingZeroBits(), "short");
+            Assert.AreEqual(32, ((uint)0).TrailingZeroBits(), "uint");
+            Assert.AreEqual(32, 0.TrailingZeroBits(), "int");
+            Assert.AreEqual(64, ((ulong)0).TrailingZeroBits(), "ulong");
+            Assert.AreEqual(64, ((long)0).TrailingZeroBits(), "long");
+            Assert.AreEqual(128, ((UInt128)0).TrailingZeroBits(), "UInt128");
         }
 
         [Test]
         public void TrailingZeroBits1ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((byte)1), "byte");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((sbyte)1), "sbyte");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((ushort)1), "ushort");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((short)1), "short");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((uint)1), "uint");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((int)1), "int");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((ulong)1), "ulong");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((long)1), "long");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((UInt128)1), "UInt128");
+            Assert.AreEqual(0, ((byte)1).TrailingZeroBits(), "byte");
+            Assert.AreEqual(0, ((sbyte)1).TrailingZeroBits(), "sbyte");
+            Assert.AreEqual(0, ((ushort)1).TrailingZeroBits(), "ushort");
+            Assert.AreEqual(0, ((short)1).TrailingZeroBits(), "short");
+            Assert.AreEqual(0, ((uint)1).TrailingZeroBits(), "uint");
+            Assert.AreEqual(0, 1.TrailingZeroBits(), "int");
+            Assert.AreEqual(0, ((ulong)1).TrailingZeroBits(), "ulong");
+            Assert.AreEqual(0, ((long)1).TrailingZeroBits(), "long");
+            Assert.AreEqual(0, ((UInt128)1).TrailingZeroBits(), "UInt128");
         }
 
         [Test]
         public void TrailingZeroBitsAllBitsSetShouldReturn0() {
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((byte)0xff), "byte");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((sbyte)-1), "sbyte");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((ushort)0xffff), "ushort");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((short)-1), "short");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((uint)0xffffffff), "uint");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((int)-1), "int");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits((long)-1), "long");
-            Assert.AreEqual(0, BitMath.TrailingZeroBits(new UInt128(0xffffffffffffffff, 0xffffffffffffffff)), "UInt128");
+            Assert.AreEqual(0, ((byte)0xff).TrailingZeroBits(), "byte");
+            Assert.AreEqual(0, ((sbyte)-1).TrailingZeroBits(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0xffff).TrailingZeroBits(), "ushort");
+            Assert.AreEqual(0, ((short)-1).TrailingZeroBits(), "short");
+            Assert.AreEqual(0, 0xffffffff.TrailingZeroBits(), "uint");
+            Assert.AreEqual(0, (-1).TrailingZeroBits(), "int");
+            Assert.AreEqual(0, 0xffffffffffffffff.TrailingZeroBits(), "ulong");
+            Assert.AreEqual(0, ((long)-1).TrailingZeroBits(), "long");
+            Assert.AreEqual(0, new UInt128(0xffffffffffffffff, 0xffffffffffffffff).TrailingZeroBits(), "UInt128");
         }
 
         [Test]
         public void TrailingZeroBitsAllBitsMinus1ShouldReturn1() {
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((byte)0xfe), "byte");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((sbyte)-2), "sbyte");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((ushort)0xfffe), "ushort");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((short)-2), "short");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((uint)0xfffffffe), "uint");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((int)-2), "int");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((ulong)0xfffffffffffffffe), "ulong");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits((long)-2), "long");
-            Assert.AreEqual(1, BitMath.TrailingZeroBits(new UInt128(0xffffffffffffffff, 0xfffffffffffffffe)), "UInt128");
+            Assert.AreEqual(1, ((byte)0xfe).TrailingZeroBits(), "byte");
+            Assert.AreEqual(1, ((sbyte)-2).TrailingZeroBits(), "sbyte");
+            Assert.AreEqual(1, ((ushort)0xfffe).TrailingZeroBits(), "ushort");
+            Assert.AreEqual(1, ((short)-2).TrailingZeroBits(), "short");
+            Assert.AreEqual(1, 0xfffffffe.TrailingZeroBits(), "uint");
+            Assert.AreEqual(1, (-2).TrailingZeroBits(), "int");
+            Assert.AreEqual(1, 0xfffffffffffffffe.TrailingZeroBits(), "ulong");
+            Assert.AreEqual(1, ((long)-2).TrailingZeroBits(), "long");
+            Assert.AreEqual(1, new UInt128(0xffffffffffffffff, 0xfffffffffffffffe).TrailingZeroBits(), "UInt128");
         }
 
         [Test]
         public void TrailingZeroBitsByteShouldMatchWider() {
             byte v = byte.MinValue;
             while (true) {
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits(unchecked((sbyte)v)), "sbyte");
+                Assert.AreEqual(v.TrailingZeroBits(), unchecked((sbyte)v).TrailingZeroBits(), "sbyte");
                 if (v == 0) {
                     v++;
                     continue; // the result for 0 is type dependant
                 }
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits((ushort)v), "short");
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits((short)v), "short");
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits((uint)v), "uint");
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits((int)v), "int");
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits((ulong)v), "ulong");
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits((long)v), "long");
-                Assert.AreEqual(BitMath.TrailingZeroBits(v), BitMath.TrailingZeroBits((UInt128)v), "UInt128");
+                Assert.AreEqual(v.TrailingZeroBits(), ((ushort)v).TrailingZeroBits(), "short");
+                Assert.AreEqual(v.TrailingZeroBits(), ((short)v).TrailingZeroBits(), "short");
+                Assert.AreEqual(v.TrailingZeroBits(), ((uint)v).TrailingZeroBits(), "uint");
+                Assert.AreEqual(v.TrailingZeroBits(), ((int)v).TrailingZeroBits(), "int");
+                Assert.AreEqual(v.TrailingZeroBits(), ((ulong)v).TrailingZeroBits(), "ulong");
+                Assert.AreEqual(v.TrailingZeroBits(), ((long)v).TrailingZeroBits(), "long");
+                Assert.AreEqual(v.TrailingZeroBits(), ((UInt128)v).TrailingZeroBits(), "UInt128");
                 if (v == byte.MaxValue) break;
                 v++;
             }
@@ -337,95 +337,95 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void LeadingZeroBits0ShouldReturnBitWidth() {
-            Assert.AreEqual(8, BitMath.LeadingZeroBits((byte)0), "byte");
-            Assert.AreEqual(8, BitMath.LeadingZeroBits((sbyte)0), "sbyte");
-            Assert.AreEqual(16, BitMath.LeadingZeroBits((ushort)0), "ushort");
-            Assert.AreEqual(16, BitMath.LeadingZeroBits((short)0), "short");
-            Assert.AreEqual(32, BitMath.LeadingZeroBits((uint)0), "uint");
-            Assert.AreEqual(32, BitMath.LeadingZeroBits((int)0), "int");
-            Assert.AreEqual(64, BitMath.LeadingZeroBits((ulong)0), "ulong");
-            Assert.AreEqual(64, BitMath.LeadingZeroBits((long)0), "long");
-            Assert.AreEqual(128, BitMath.LeadingZeroBits((UInt128)0), "UInt128");
+            Assert.AreEqual(8, ((byte)0).LeadingZeroBits(), "byte");
+            Assert.AreEqual(8, ((sbyte)0).LeadingZeroBits(), "sbyte");
+            Assert.AreEqual(16, ((ushort)0).LeadingZeroBits(), "ushort");
+            Assert.AreEqual(16, ((short)0).LeadingZeroBits(), "short");
+            Assert.AreEqual(32, ((uint)0).LeadingZeroBits(), "uint");
+            Assert.AreEqual(32, 0.LeadingZeroBits(), "int");
+            Assert.AreEqual(64, ((ulong)0).LeadingZeroBits(), "ulong");
+            Assert.AreEqual(64, ((long)0).LeadingZeroBits(), "long");
+            Assert.AreEqual(128, ((UInt128)0).LeadingZeroBits(), "UInt128");
         }
 
         [Test]
         public void LeadingZeroBits1ShouldReturnBitWidthLessOne() {
-            Assert.AreEqual(7, BitMath.LeadingZeroBits((byte)1), "byte");
-            Assert.AreEqual(7, BitMath.LeadingZeroBits((sbyte)1), "sbyte");
-            Assert.AreEqual(15, BitMath.LeadingZeroBits((ushort)1), "ushort");
-            Assert.AreEqual(15, BitMath.LeadingZeroBits((short)1), "short");
-            Assert.AreEqual(31, BitMath.LeadingZeroBits((uint)1), "uint");
-            Assert.AreEqual(31, BitMath.LeadingZeroBits((int)1), "int");
-            Assert.AreEqual(63, BitMath.LeadingZeroBits((ulong)1), "ulong");
-            Assert.AreEqual(63, BitMath.LeadingZeroBits((long)1), "long");
-            Assert.AreEqual(127, BitMath.LeadingZeroBits((UInt128)1), "UInt128");
+            Assert.AreEqual(7, ((byte)1).LeadingZeroBits(), "byte");
+            Assert.AreEqual(7, ((sbyte)1).LeadingZeroBits(), "sbyte");
+            Assert.AreEqual(15, ((ushort)1).LeadingZeroBits(), "ushort");
+            Assert.AreEqual(15, ((short)1).LeadingZeroBits(), "short");
+            Assert.AreEqual(31, ((uint)1).LeadingZeroBits(), "uint");
+            Assert.AreEqual(31, 1.LeadingZeroBits(), "int");
+            Assert.AreEqual(63, ((ulong)1).LeadingZeroBits(), "ulong");
+            Assert.AreEqual(63, ((long)1).LeadingZeroBits(), "long");
+            Assert.AreEqual(127, ((UInt128)1).LeadingZeroBits(), "UInt128");
         }
 
         [Test]
         public void LeadingZeroBitsAllBitsSetShouldReturn0() {
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((byte)0xff), "byte");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((sbyte)-1), "sbyte");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((ushort)0xffff), "ushort");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((short)-1), "short");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((uint)0xffffffff), "uint");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((int)-1), "int");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits((long)-1), "long");
-            Assert.AreEqual(0, BitMath.LeadingZeroBits(new UInt128(0xffffffffffffffff, 0xffffffffffffffff)), "UInt128");
+            Assert.AreEqual(0, ((byte)0xff).LeadingZeroBits(), "byte");
+            Assert.AreEqual(0, ((sbyte)-1).LeadingZeroBits(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0xffff).LeadingZeroBits(), "ushort");
+            Assert.AreEqual(0, ((short)-1).LeadingZeroBits(), "short");
+            Assert.AreEqual(0, 0xffffffff.LeadingZeroBits(), "uint");
+            Assert.AreEqual(0, (-1).LeadingZeroBits(), "int");
+            Assert.AreEqual(0, 0xffffffffffffffff.LeadingZeroBits(), "ulong");
+            Assert.AreEqual(0, ((long)-1).LeadingZeroBits(), "long");
+            Assert.AreEqual(0, new UInt128(0xffffffffffffffff, 0xffffffffffffffff).LeadingZeroBits(), "UInt128");
         }
 
         [Test]
         public void SignificantBits0ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.SignificantBits((byte)0), "byte");
-            Assert.AreEqual(0, BitMath.SignificantBits((sbyte)0), "sbyte");
-            Assert.AreEqual(0, BitMath.SignificantBits((ushort)0), "ushort");
-            Assert.AreEqual(0, BitMath.SignificantBits((short)0), "short");
-            Assert.AreEqual(0, BitMath.SignificantBits((uint)0), "uint");
-            Assert.AreEqual(0, BitMath.SignificantBits((int)0), "int");
-            Assert.AreEqual(0, BitMath.SignificantBits((ulong)0), "ulong");
-            Assert.AreEqual(0, BitMath.SignificantBits((long)0), "long");
-            Assert.AreEqual(0, BitMath.SignificantBits((UInt128)0), "UInt128");
+            Assert.AreEqual(0, ((byte)0).SignificantBits(), "byte");
+            Assert.AreEqual(0, ((sbyte)0).SignificantBits(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0).SignificantBits(), "ushort");
+            Assert.AreEqual(0, ((short)0).SignificantBits(), "short");
+            Assert.AreEqual(0, ((uint)0).SignificantBits(), "uint");
+            Assert.AreEqual(0, 0.SignificantBits(), "int");
+            Assert.AreEqual(0, ((ulong)0).SignificantBits(), "ulong");
+            Assert.AreEqual(0, ((long)0).SignificantBits(), "long");
+            Assert.AreEqual(0, ((UInt128)0).SignificantBits(), "UInt128");
         }
 
         [Test]
         public void SignificantBits1ShouldReturn1() {
-            Assert.AreEqual(1, BitMath.SignificantBits((byte)1), "byte");
-            Assert.AreEqual(1, BitMath.SignificantBits((sbyte)1), "sbyte");
-            Assert.AreEqual(1, BitMath.SignificantBits((ushort)1), "ushort");
-            Assert.AreEqual(1, BitMath.SignificantBits((short)1), "short");
-            Assert.AreEqual(1, BitMath.SignificantBits((uint)1), "uint");
-            Assert.AreEqual(1, BitMath.SignificantBits((int)1), "int");
-            Assert.AreEqual(1, BitMath.SignificantBits((ulong)1), "ulong");
-            Assert.AreEqual(1, BitMath.SignificantBits((long)1), "long");
-            Assert.AreEqual(1, BitMath.SignificantBits((UInt128)1), "UInt128");
+            Assert.AreEqual(1, ((byte)1).SignificantBits(), "byte");
+            Assert.AreEqual(1, ((sbyte)1).SignificantBits(), "sbyte");
+            Assert.AreEqual(1, ((ushort)1).SignificantBits(), "ushort");
+            Assert.AreEqual(1, ((short)1).SignificantBits(), "short");
+            Assert.AreEqual(1, ((uint)1).SignificantBits(), "uint");
+            Assert.AreEqual(1, 1.SignificantBits(), "int");
+            Assert.AreEqual(1, ((ulong)1).SignificantBits(), "ulong");
+            Assert.AreEqual(1, ((long)1).SignificantBits(), "long");
+            Assert.AreEqual(1, ((UInt128)1).SignificantBits(), "UInt128");
         }
 
         [Test]
         public void SignificantBitsAllBitsSetShouldReturnBitWidth() {
-            Assert.AreEqual(8, BitMath.SignificantBits((byte)0xff), "byte");
-            Assert.AreEqual(8, BitMath.SignificantBits((sbyte)-1), "sbyte");
-            Assert.AreEqual(16, BitMath.SignificantBits((ushort)0xffff), "ushort");
-            Assert.AreEqual(16, BitMath.SignificantBits((short)-1), "short");
-            Assert.AreEqual(32, BitMath.SignificantBits((uint)0xffffffff), "uint");
-            Assert.AreEqual(32, BitMath.SignificantBits((int)-1), "int");
-            Assert.AreEqual(64, BitMath.SignificantBits((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(64, BitMath.SignificantBits((long)-1), "long");
-            Assert.AreEqual(128, BitMath.SignificantBits(new UInt128(0xffffffffffffffff, 0xffffffffffffffff)), "UInt128");
+            Assert.AreEqual(8, ((byte)0xff).SignificantBits(), "byte");
+            Assert.AreEqual(8, ((sbyte)-1).SignificantBits(), "sbyte");
+            Assert.AreEqual(16, ((ushort)0xffff).SignificantBits(), "ushort");
+            Assert.AreEqual(16, ((short)-1).SignificantBits(), "short");
+            Assert.AreEqual(32, 0xffffffff.SignificantBits(), "uint");
+            Assert.AreEqual(32, (-1).SignificantBits(), "int");
+            Assert.AreEqual(64, 0xffffffffffffffff.SignificantBits(), "ulong");
+            Assert.AreEqual(64, ((long)-1).SignificantBits(), "long");
+            Assert.AreEqual(128, new UInt128(0xffffffffffffffff, 0xffffffffffffffff).SignificantBits(), "UInt128");
         }
 
         [Test]
         public void SignificantBitsByteShouldMatchWider() {
             byte v = byte.MinValue;
             while (true) {
-                int expected = BitMath.SignificantBits(v);
-                Assert.AreEqual(expected, BitMath.SignificantBits(unchecked((sbyte)v)), "sbyte");
-                Assert.AreEqual(expected, BitMath.SignificantBits((ushort)v), "ushort");
-                Assert.AreEqual(expected, BitMath.SignificantBits((short)v), "short");
-                Assert.AreEqual(expected, BitMath.SignificantBits((uint)v), "uint");
-                Assert.AreEqual(expected, BitMath.SignificantBits((int)v), "int");
-                Assert.AreEqual(expected, BitMath.SignificantBits((ulong)v), "ulong");
-                Assert.AreEqual(expected, BitMath.SignificantBits((long)v), "long");
-                Assert.AreEqual(expected, BitMath.SignificantBits((UInt128)v), "UInt128");
+                int expected = v.SignificantBits();
+                Assert.AreEqual(expected, unchecked((sbyte)v).SignificantBits(), "sbyte");
+                Assert.AreEqual(expected, ((ushort)v).SignificantBits(), "ushort");
+                Assert.AreEqual(expected, ((short)v).SignificantBits(), "short");
+                Assert.AreEqual(expected, ((uint)v).SignificantBits(), "uint");
+                Assert.AreEqual(expected, ((int)v).SignificantBits(), "int");
+                Assert.AreEqual(expected, ((ulong)v).SignificantBits(), "ulong");
+                Assert.AreEqual(expected, ((long)v).SignificantBits(), "long");
+                Assert.AreEqual(expected, ((UInt128)v).SignificantBits(), "UInt128");
                 if (v == byte.MaxValue) break;
                 v++;
             }
@@ -433,68 +433,68 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void BitCount0ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.BitCount((byte)0), "byte");
-            Assert.AreEqual(0, BitMath.BitCount((sbyte)0), "sbyte");
-            Assert.AreEqual(0, BitMath.BitCount((ushort)0), "ushort");
-            Assert.AreEqual(0, BitMath.BitCount((short)0), "short");
-            Assert.AreEqual(0, BitMath.BitCount((uint)0), "uint");
-            Assert.AreEqual(0, BitMath.BitCount((int)0), "int");
-            Assert.AreEqual(0, BitMath.BitCount((ulong)0), "ulong");
-            Assert.AreEqual(0, BitMath.BitCount((long)0), "long");
-            Assert.AreEqual(0, BitMath.BitCount((UInt128)0), "UInt128");
+            Assert.AreEqual(0, ((byte)0).BitCount(), "byte");
+            Assert.AreEqual(0, ((sbyte)0).BitCount(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0).BitCount(), "ushort");
+            Assert.AreEqual(0, ((short)0).BitCount(), "short");
+            Assert.AreEqual(0, ((uint)0).BitCount(), "uint");
+            Assert.AreEqual(0, 0.BitCount(), "int");
+            Assert.AreEqual(0, ((ulong)0).BitCount(), "ulong");
+            Assert.AreEqual(0, ((long)0).BitCount(), "long");
+            Assert.AreEqual(0, ((UInt128)0).BitCount(), "UInt128");
         }
 
         [Test]
         public void BitCount1ShouldReturn1() {
-            Assert.AreEqual(1, BitMath.BitCount((byte)1), "byte");
-            Assert.AreEqual(1, BitMath.BitCount((sbyte)1), "sbyte");
-            Assert.AreEqual(1, BitMath.BitCount((ushort)1), "ushort");
-            Assert.AreEqual(1, BitMath.BitCount((short)1), "short");
-            Assert.AreEqual(1, BitMath.BitCount((uint)1), "uint");
-            Assert.AreEqual(1, BitMath.BitCount((int)1), "int");
-            Assert.AreEqual(1, BitMath.BitCount((ulong)1), "ulong");
-            Assert.AreEqual(1, BitMath.BitCount((long)1), "long");
-            Assert.AreEqual(1, BitMath.BitCount((UInt128)1), "UInt128");
+            Assert.AreEqual(1, ((byte)1).BitCount(), "byte");
+            Assert.AreEqual(1, ((sbyte)1).BitCount(), "sbyte");
+            Assert.AreEqual(1, ((ushort)1).BitCount(), "ushort");
+            Assert.AreEqual(1, ((short)1).BitCount(), "short");
+            Assert.AreEqual(1, ((uint)1).BitCount(), "uint");
+            Assert.AreEqual(1, 1.BitCount(), "int");
+            Assert.AreEqual(1, ((ulong)1).BitCount(), "ulong");
+            Assert.AreEqual(1, ((long)1).BitCount(), "long");
+            Assert.AreEqual(1, ((UInt128)1).BitCount(), "UInt128");
         }
 
         [Test]
         public void BitCountAllBitsSetShouldReturnBitWidth() {
-            Assert.AreEqual(8, BitMath.BitCount((byte)0xff), "byte");
-            Assert.AreEqual(8, BitMath.BitCount((sbyte)-1), "sbyte");
-            Assert.AreEqual(16, BitMath.BitCount((ushort)0xffff), "ushort");
-            Assert.AreEqual(16, BitMath.BitCount((short)-1), "short");
-            Assert.AreEqual(32, BitMath.BitCount((uint)0xffffffff), "uint");
-            Assert.AreEqual(32, BitMath.BitCount((int)-1), "int");
-            Assert.AreEqual(64, BitMath.BitCount((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(64, BitMath.BitCount((long)-1), "long");
-            Assert.AreEqual(128, BitMath.BitCount(new UInt128(0xffffffffffffffff, 0xffffffffffffffff)), "UInt128");
+            Assert.AreEqual(8, ((byte)0xff).BitCount(), "byte");
+            Assert.AreEqual(8, ((sbyte)-1).BitCount(), "sbyte");
+            Assert.AreEqual(16, ((ushort)0xffff).BitCount(), "ushort");
+            Assert.AreEqual(16, ((short)-1).BitCount(), "short");
+            Assert.AreEqual(32, 0xffffffff.BitCount(), "uint");
+            Assert.AreEqual(32, (-1).BitCount(), "int");
+            Assert.AreEqual(64, 0xffffffffffffffff.BitCount(), "ulong");
+            Assert.AreEqual(64, ((long)-1).BitCount(), "long");
+            Assert.AreEqual(128, new UInt128(0xffffffffffffffff, 0xffffffffffffffff).BitCount(), "UInt128");
         }
 
         [Test]
         public void BitCountMsbSetShouldReturn1() {
-            Assert.AreEqual(1, BitMath.BitCount((byte)0x80), "byte");
-            Assert.AreEqual(1, BitMath.BitCount(sbyte.MinValue), "sbyte");
-            Assert.AreEqual(1, BitMath.BitCount((ushort)0x8000), "ushort");
-            Assert.AreEqual(1, BitMath.BitCount(short.MinValue), "short");
-            Assert.AreEqual(1, BitMath.BitCount((uint)0x80000000), "uint");
-            Assert.AreEqual(1, BitMath.BitCount(int.MinValue), "int");
-            Assert.AreEqual(1, BitMath.BitCount((ulong)0x8000000000000000), "ulong");
-            Assert.AreEqual(1, BitMath.BitCount(long.MinValue), "long");
-            Assert.AreEqual(1, BitMath.BitCount(new UInt128(0x8000000000000000, 0)), "UInt128");
+            Assert.AreEqual(1, ((byte)0x80).BitCount(), "byte");
+            Assert.AreEqual(1, sbyte.MinValue.BitCount(), "sbyte");
+            Assert.AreEqual(1, ((ushort)0x8000).BitCount(), "ushort");
+            Assert.AreEqual(1, short.MinValue.BitCount(), "short");
+            Assert.AreEqual(1, 0x80000000.BitCount(), "uint");
+            Assert.AreEqual(1, int.MinValue.BitCount(), "int");
+            Assert.AreEqual(1, 0x8000000000000000.BitCount(), "ulong");
+            Assert.AreEqual(1, long.MinValue.BitCount(), "long");
+            Assert.AreEqual(1, new UInt128(0x8000000000000000, 0).BitCount(), "UInt128");
         }
 
         [Test]
         public void BitCountByteShouldMatchWider() {
             byte v = byte.MinValue;
             while (true) {
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount(unchecked((sbyte)v)), "sbyte");
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount((ushort)v), "ushort");
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount((short)v), "short");
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount((uint)v), "uint");
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount((int)v), "int");
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount((ulong)v), "ulong");
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount((long)v), "long");
-                Assert.AreEqual(BitMath.BitCount(v), BitMath.BitCount((UInt128)v), "UInt128");
+                Assert.AreEqual(v.BitCount(), unchecked((sbyte)v).BitCount(), "sbyte");
+                Assert.AreEqual(v.BitCount(), ((ushort)v).BitCount(), "ushort");
+                Assert.AreEqual(v.BitCount(), ((short)v).BitCount(), "short");
+                Assert.AreEqual(v.BitCount(), ((uint)v).BitCount(), "uint");
+                Assert.AreEqual(v.BitCount(), ((int)v).BitCount(), "int");
+                Assert.AreEqual(v.BitCount(), ((ulong)v).BitCount(), "ulong");
+                Assert.AreEqual(v.BitCount(), ((long)v).BitCount(), "long");
+                Assert.AreEqual(v.BitCount(), ((UInt128)v).BitCount(), "UInt128");
                 if (v == byte.MaxValue) break;
                 v++;
             }
@@ -502,61 +502,61 @@ namespace SoftWx.Numerics.Tests {
 
         [Test]
         public void ReverseBits0ShouldReturn0() {
-            Assert.AreEqual(0, BitMath.ReverseBits((byte)0), "byte");
-            Assert.AreEqual(0, BitMath.ReverseBits((sbyte)0), "sbyte");
-            Assert.AreEqual(0, BitMath.ReverseBits((ushort)0), "ushort");
-            Assert.AreEqual(0, BitMath.ReverseBits((short)0), "short");
-            Assert.AreEqual(0, BitMath.ReverseBits((uint)0), "uint");
-            Assert.AreEqual(0, BitMath.ReverseBits((int)0), "int");
-            Assert.AreEqual(0, BitMath.ReverseBits((ulong)0), "ulong");
-            Assert.AreEqual(0, BitMath.ReverseBits((long)0), "long");
-            Assert.AreEqual(UInt128.Zero, BitMath.ReverseBits((UInt128)0), "UInt128");
+            Assert.AreEqual(0, ((byte)0).ReverseBits(), "byte");
+            Assert.AreEqual(0, ((sbyte)0).ReverseBits(), "sbyte");
+            Assert.AreEqual(0, ((ushort)0).ReverseBits(), "ushort");
+            Assert.AreEqual(0, ((short)0).ReverseBits(), "short");
+            Assert.AreEqual(0, ((uint)0).ReverseBits(), "uint");
+            Assert.AreEqual(0, 0.ReverseBits(), "int");
+            Assert.AreEqual(0, ((ulong)0).ReverseBits(), "ulong");
+            Assert.AreEqual(0, ((long)0).ReverseBits(), "long");
+            Assert.AreEqual(UInt128.Zero, ((UInt128)0).ReverseBits(), "UInt128");
         }
 
         [Test]
         public void ReverseBits1ShouldReturnMsb() {
-            Assert.AreEqual(0x80, BitMath.ReverseBits((byte)1), "byte");
-            Assert.AreEqual(sbyte.MinValue, BitMath.ReverseBits((sbyte)1), "sbyte");
-            Assert.AreEqual(0x8000, BitMath.ReverseBits((ushort)1), "ushort");
-            Assert.AreEqual(short.MinValue, BitMath.ReverseBits((short)1), "short");
-            Assert.AreEqual(0x80000000, BitMath.ReverseBits((uint)1), "uint");
-            Assert.AreEqual(int.MinValue, BitMath.ReverseBits((int)1), "int");
-            Assert.AreEqual(0x8000000000000000, BitMath.ReverseBits((ulong)1), "ulong");
-            Assert.AreEqual(long.MinValue, BitMath.ReverseBits((long)1), "long");
-            Assert.AreEqual(new UInt128(0x8000000000000000, 0), BitMath.ReverseBits((UInt128)1), "UInt128");
+            Assert.AreEqual(0x80, ((byte)1).ReverseBits(), "byte");
+            Assert.AreEqual(sbyte.MinValue, ((sbyte)1).ReverseBits(), "sbyte");
+            Assert.AreEqual(0x8000, ((ushort)1).ReverseBits(), "ushort");
+            Assert.AreEqual(short.MinValue, ((short)1).ReverseBits(), "short");
+            Assert.AreEqual(0x80000000, ((uint)1).ReverseBits(), "uint");
+            Assert.AreEqual(int.MinValue, 1.ReverseBits(), "int");
+            Assert.AreEqual(0x8000000000000000, ((ulong)1).ReverseBits(), "ulong");
+            Assert.AreEqual(long.MinValue, ((long)1).ReverseBits(), "long");
+            Assert.AreEqual(new UInt128(0x8000000000000000, 0), ((UInt128)1).ReverseBits(), "UInt128");
         }
 
         [Test]
         public void ReverseBitsAllBitsSetShouldReturnAllBitsSet() {
-            Assert.AreEqual(0xff, BitMath.ReverseBits((byte)0xff), "byte");
-            Assert.AreEqual(-1, BitMath.ReverseBits((sbyte)-1), "sbyte");
-            Assert.AreEqual(0xffff, BitMath.ReverseBits((ushort)0xffff), "ushort");
-            Assert.AreEqual(-1, BitMath.ReverseBits((short)-1), "short");
-            Assert.AreEqual(0xffffffff, BitMath.ReverseBits((uint)0xffffffff), "uint");
-            Assert.AreEqual(-1, BitMath.ReverseBits((int)-1), "int");
-            Assert.AreEqual(0xffffffffffffffff, BitMath.ReverseBits((ulong)0xffffffffffffffff), "ulong");
-            Assert.AreEqual(-1, BitMath.ReverseBits((long)-1), "long");
-            Assert.AreEqual(new UInt128(0xffffffffffffffff, 0xffffffffffffffff), BitMath.ReverseBits(new UInt128(0xffffffffffffffff, 0xffffffffffffffff)), "UInt128");
+            Assert.AreEqual(0xff, ((byte)0xff).ReverseBits(), "byte");
+            Assert.AreEqual(-1, ((sbyte)-1).ReverseBits(), "sbyte");
+            Assert.AreEqual(0xffff, ((ushort)0xffff).ReverseBits(), "ushort");
+            Assert.AreEqual(-1, ((short)-1).ReverseBits(), "short");
+            Assert.AreEqual(0xffffffff, 0xffffffff.ReverseBits(), "uint");
+            Assert.AreEqual(-1, (-1).ReverseBits(), "int");
+            Assert.AreEqual(0xffffffffffffffff, 0xffffffffffffffff.ReverseBits(), "ulong");
+            Assert.AreEqual(-1, ((long)-1).ReverseBits(), "long");
+            Assert.AreEqual(new UInt128(0xffffffffffffffff, 0xffffffffffffffff), new UInt128(0xffffffffffffffff, 0xffffffffffffffff).ReverseBits(), "UInt128");
         }
 
         [Test]
         public void ReverseBitsMsbSetShouldReturn1() {
-            Assert.AreEqual(1, BitMath.ReverseBits((byte)0x80), "byte");
-            Assert.AreEqual(1, BitMath.ReverseBits(sbyte.MinValue), "sbyte");
-            Assert.AreEqual(1, BitMath.ReverseBits((ushort)0x8000), "ushort");
-            Assert.AreEqual(1, BitMath.ReverseBits(short.MinValue), "short");
-            Assert.AreEqual(1, BitMath.ReverseBits((uint)0x80000000), "uint");
-            Assert.AreEqual(1, BitMath.ReverseBits(int.MinValue), "int");
-            Assert.AreEqual(1, BitMath.ReverseBits((ulong)0x8000000000000000), "ulong");
-            Assert.AreEqual(1, BitMath.ReverseBits(long.MinValue), "long");
-            Assert.AreEqual(UInt128.One, BitMath.ReverseBits(new UInt128(0x8000000000000000,0)), "UInt128");
+            Assert.AreEqual(1, ((byte)0x80).ReverseBits(), "byte");
+            Assert.AreEqual(1, sbyte.MinValue.ReverseBits(), "sbyte");
+            Assert.AreEqual(1, ((ushort)0x8000).ReverseBits(), "ushort");
+            Assert.AreEqual(1, short.MinValue.ReverseBits(), "short");
+            Assert.AreEqual(1, 0x80000000.ReverseBits(), "uint");
+            Assert.AreEqual(1, int.MinValue.ReverseBits(), "int");
+            Assert.AreEqual(1, 0x8000000000000000.ReverseBits(), "ulong");
+            Assert.AreEqual(1, long.MinValue.ReverseBits(), "long");
+            Assert.AreEqual(UInt128.One, new UInt128(0x8000000000000000,0).ReverseBits(), "UInt128");
         }
 
         [Test]
         public void ReverseBitsByteTwiceShouldReturnOriginal() {
             byte v = byte.MinValue;
             while (true) {
-                Assert.AreEqual(v, (byte)BitMath.ReverseBits(BitMath.ReverseBits((byte)v)), "sbyte");
+                Assert.AreEqual(v, v.ReverseBits().ReverseBits(), "sbyte");
                 if (v == byte.MaxValue) break;
                 v++;
             }
