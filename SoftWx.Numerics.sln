@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftWx.Numerics", "src\SoftWx.Numerics\SoftWx.Numerics.csproj", "{C12EB974-EF54-4C04-AB58-9A67F25B4A53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftWx.Numerics.Tests", "src\SoftWx.Numerics.Tests\SoftWx.Numerics.Tests.csproj", "{77B99905-9A74-4DC1-9F17-B5D5EA1CBCDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C12EB974-EF54-4C04-AB58-9A67F25B4A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C12EB974-EF54-4C04-AB58-9A67F25B4A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C12EB974-EF54-4C04-AB58-9A67F25B4A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C12EB974-EF54-4C04-AB58-9A67F25B4A53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B99905-9A74-4DC1-9F17-B5D5EA1CBCDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B99905-9A74-4DC1-9F17-B5D5EA1CBCDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B99905-9A74-4DC1-9F17-B5D5EA1CBCDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B99905-9A74-4DC1-9F17-B5D5EA1CBCDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
