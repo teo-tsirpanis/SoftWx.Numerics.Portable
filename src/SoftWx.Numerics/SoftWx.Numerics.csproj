@@ -4,13 +4,14 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>SoftWx.Numerics.Portable</PackageId>
-    <Version>2.1</Version>
+    <Version>2.2</Version>
     <Authors>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Authors>
     <Company>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Company>
     <Copyright>Copyright © 2013-2017 SoftWx, Inc.</Copyright>
     <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageTags>SoftWx Prime IsPrime Gcd UInt128 Integer Numeric</PackageTags>
-    <PackageReleaseNotes>2.1: Ported to .NET Standard.
+    <PackageReleaseNotes>2.2: Added bitwise xor operator on UInt128.
+2.1: Ported to .NET Standard.
 2.0.1: Added IComparable interface implementations to UInt128. 
 2.0.0: First NuGet release. Added UInt128 class, removed dependency on BigInteger, numerous other improvements. 
 1.0.0: First release, via http://blog.softwx.net</PackageReleaseNotes>
@@ -18,13 +19,13 @@
     <RepositoryUrl>https://github.com/teo-tsirpanis/SoftWx.Numerics.Portable</RepositoryUrl>
     <PackageProjectUrl>https://github.com/teo-tsirpanis/SoftWx.Numerics.Portable</PackageProjectUrl>
     <Product>SoftWx.Numerics for .NET Standard.</Product>
-    <Description>Library containing a UInt128 class, and extensions to .Net's built in integral data types.
+    <Summary>Library containing a UInt128 class, and extensions to .Net's built in integral data types.
 
 The package targets .NET Standard 1.0. It was originally written by Steve Hatchett.
 
 The methods in this library were written with speed in mind. UInt128 operations are generally much faster than BigInteger.
 
-Includes an IsPrime method for ulong that's pretty fast even for ulong values near MaxValue, as it uses the Miller-Rabin algorithm that's deterministic (not probable) over the range of ulong values.</Description>
+Includes an IsPrime method for ulong that's pretty fast even for ulong values near MaxValue, as it uses the Miller-Rabin algorithm that's deterministic (not probable) over the range of ulong values.</Summary>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

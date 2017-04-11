@@ -347,6 +347,33 @@ namespace SoftWx.Numerics
             return new UInt128(right.High, left | right.Low);
         }
 
+        /// <summary>Performs a bitwise Xor operation on two values.</summary>
+        /// <param name="left">The first value.</param>
+        /// <param name="right">The second value.</param>
+        /// <returns>The result of the bitwise Xor operation.</returns>
+        public static UInt128 operator ^(UInt128 left, UInt128 right)
+        {
+            return new UInt128(left.High ^ right.High, left.Low ^ right.Low);
+        }
+
+        /// <summary>Performs a bitwise Xor operation on two values.</summary>
+        /// <param name="left">The first value.</param>
+        /// <param name="right">The second value.</param>
+        /// <returns>The result of the bitwise Xor operation.</returns>
+        public static UInt128 operator ^(UInt128 left, ulong right)
+        {
+            return new UInt128(left.High, left.Low ^ right);
+        }
+
+        /// <summary>Performs a bitwise Xor operation on two values.</summary>
+        /// <param name="left">The first value.</param>
+        /// <param name="right">The second value.</param>
+        /// <returns>The result of the bitwise Xor operation.</returns>
+        public static UInt128 operator ^(ulong left, UInt128 right)
+        {
+            return new UInt128(right.High, left ^ right.Low);
+        }
+
         /// <summary>Shifts a UInt128 value a specified number of bits to the left.</summary>
         /// <param name="value">The value whose bits are to be shifted.</param>
         /// <param name="shift">The number of bits to shift value to the left.</param>
