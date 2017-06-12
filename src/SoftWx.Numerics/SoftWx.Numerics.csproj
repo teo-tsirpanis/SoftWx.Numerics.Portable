@@ -26,10 +26,7 @@ The package targets .NET Standard 1.0. It was originally written by Steve Hatche
 The methods in this library were written with speed in mind. UInt128 operations are generally much faster than BigInteger.
 
 Includes an IsPrime method for ulong that's pretty fast even for ulong values near MaxValue, as it uses the Miller-Rabin algorithm that's deterministic (not probable) over the range of ulong values.</Summary>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard1.0\SoftWx.Numerics.xml</DocumentationFile>
+    <DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

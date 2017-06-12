@@ -293,6 +293,11 @@ namespace SoftWx.Numerics
             return new UInt128(~value.High, ~value.Low);
         }
 
+        /// <summary>Returns the bitwise two's complement of a UInt128 value.</summary>
+        /// <param name="value">The value to be complemented.</param>
+        /// <returns>The bitwise two's complement of value.</returns>
+        public static UInt128 operator -(UInt128 value) => ~value + One;
+
         /// <summary>Performs a bitwise And operation on two values.</summary>
         /// <param name="left">The first value.</param>
         /// <param name="right">The second value.</param>
