@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FsCheck.Nunit" Version="2.9.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="NUnit" Version="3.6.1" />
+    <PackageReference Include="NUnit" Version="3.7.1" />
     <PackageReference Include="dotnet-test-nunit" Version="3.4.0-beta-3" />
     <PackageReference Include="NUnit.Extension.VSProjectLoader" Version="3.5.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.7.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoftWx.Numerics\SoftWx.Numerics.csproj" />
