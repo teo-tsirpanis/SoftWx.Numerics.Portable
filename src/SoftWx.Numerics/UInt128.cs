@@ -126,7 +126,13 @@ namespace SoftWx.Numerics
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            return High.GetHashCode() ^ Low.GetHashCode();
+            unchecked
+            {
+                var hash = 17;
+                hash = hash * 31 + Low.GetHashCode();
+                hash = hash * 31 + High.GetHashCode();
+                return hash;
+            }
         }
 
         /// <summary>Returns the string representation of this instance.</summary>

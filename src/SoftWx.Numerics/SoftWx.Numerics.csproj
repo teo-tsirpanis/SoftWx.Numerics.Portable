@@ -1,32 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netstandard2.0</TargetFrameworks>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageId>SoftWx.Numerics.Portable</PackageId>
-    <Version>2.3</Version>
-    <Authors>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Authors>
-    <Company>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Company>
-    <Copyright>Copyright © 2013-2017 SoftWx, Inc.</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>SoftWx Prime IsPrime Gcd UInt128 Integer Numeric</PackageTags>
-    <PackageReleaseNotes>2.4: Made UInt128 a read-only struct and added SourceLink support, among other things.
-2.3: Added two's complement operator on UInt128.
-2.2: Added bitwise xor operator on UInt128.
-2.1: Ported to .NET Standard.
-2.0.1: Added IComparable interface implementations to UInt128.
-2.0.0: First NuGet release. Added UInt128 class, removed dependency on BigInteger, numerous other improvements.
-1.0.0: First release, via http://blog.softwx.net</PackageReleaseNotes>
-    <PackageIconUrl>http://www.softwx.net/files/images/softwx50x50.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/teo-tsirpanis/SoftWx.Numerics.Portable</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/teo-tsirpanis/SoftWx.Numerics.Portable</PackageProjectUrl>
-    <Product>SoftWx.Numerics for .NET Standard.</Product>
-    <Summary>Library containing a UInt128 class, and extensions to .Net's built in integral data types.
+    <PropertyGroup>
+        <TargetFrameworks>netstandard1.0;netstandard2.0</TargetFrameworks>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageId>SoftWx.Numerics.Portable</PackageId>
+        <Version>2.4</Version>
+        <Authors>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Authors>
+        <Company>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Company>
+        <Copyright>Copyright © 2013-2017 SoftWx, Inc.</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>SoftWx Prime IsPrime Gcd UInt128 Integer Numeric</PackageTags>
+        <PackageReleaseNotes>2.4: Made UInt128 a read-only struct and added SourceLink support, among other things.
+            2.3: Added two's complement operator on UInt128.
+            2.2: Added bitwise xor operator on UInt128.
+            2.1: Ported to .NET Standard.
+            2.0.1: Added IComparable interface implementations to UInt128.
+            2.0.0: First NuGet release. Added UInt128 class, removed dependency on BigInteger, numerous other improvements.
+            1.0.0: First release, via http://blog.softwx.net
+        </PackageReleaseNotes>
+        <PackageIconUrl>http://www.softwx.net/files/images/softwx50x50.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/teo-tsirpanis/SoftWx.Numerics.Portable</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/teo-tsirpanis/SoftWx.Numerics.Portable</PackageProjectUrl>
+        <Product>SoftWx.Numerics for .NET Standard.</Product>
+        <Summary>Library containing a UInt128 class, and extensions to .Net's built in integral data types.
 
-The package targets .NET Standard 1.0. It was originally written by Steve Hatchett.
+            The package targets .NET Standard 1.0. It was originally written by Steve Hatchett.
 
-The methods in this library were written with speed in mind. UInt128 operations are generally much faster than BigInteger.
+            The methods in this library were written with speed in mind. UInt128 operations are generally much faster than BigInteger.
 
-Includes an IsPrime method for ulong that's pretty fast even for ulong values near MaxValue, as it uses the Miller-Rabin algorithm that's deterministic (not probable) over the range of ulong values.</Summary>
-  </PropertyGroup>
+            Includes an IsPrime method for ulong that's pretty fast even for ulong values near MaxValue, as it uses the Miller-Rabin algorithm that's deterministic (not probable) over the range of ulong values.
+        </Summary>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All"/>
+    </ItemGroup>
 </Project>
