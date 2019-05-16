@@ -2,7 +2,6 @@
 // Released under the MIT License the text of which appears at the end of this file.
 // <authors> Steve Hatchett
 
-using System;
 using FsCheck;
 using NUnit.Framework;
 
@@ -23,12 +22,33 @@ namespace SoftWx.Numerics.Tests
     [TestFixture]
     public class TestUInt128
     {
-        [Test]
-        public void TwosComplementShouldWork()
-        {
-            Arb.Register<UInt128Generator>();
-            Prop.ForAll<UInt128>(x => -x + x == 0).QuickCheckThrowOnFailure();
-        }
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool AdditionIsCommutative(UInt128 x1, UInt128 x2) => x1 + x2 == x2 + x1;
+
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool AdditionIsAssociative(UInt128 x1, UInt128 x2, UInt128 x3) => (x1 + x2) + x3 == x1 + (x2 + x3);
+
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool AdditionHasZeroAsIdentityElement(UInt128 x) => x + UInt128.Zero == x;
+
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool MultiplicationIsCommutative(UInt128 x1, UInt128 x2) => x1 * x2 == x2 * x1;
+
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool MultiplicationIsAssociative(UInt128 x1, UInt128 x2, UInt128 x3) => (x1 * x2) * x3 == x1 * (x2 * x3);
+
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool MultiplicationIsDistributiveOverAddition(UInt128 x1, UInt128 x2, UInt128 x3) =>
+            (x1 + x2) * x3 == x1 * x3 + x2 * x3;
+
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool MultiplicationHasOneAsIdentityElement(UInt128 x) => x * UInt128.One == x;
+
+        [FsCheck.NUnit.Property(Arbitrary = new [] {typeof(UInt128Generator)})]
+        public bool MultiplicationHasZeroAsAnnihilatingElement(UInt128 x) => x * UInt128.Zero == UInt128.Zero;
+
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool TwosComplementShouldWork(UInt128 x) => -x + x == UInt128.Zero;
 
         [Test]
         public void Multiply0ShouldReturn0()

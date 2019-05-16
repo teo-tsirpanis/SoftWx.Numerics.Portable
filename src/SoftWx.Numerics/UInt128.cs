@@ -11,7 +11,10 @@ namespace SoftWx.Numerics
 {
     /// <summary>Represents a 128-bit unsigned integer.</summary>
     /// <remarks>The UInt128 struct is immutable.</remarks>
-    public struct UInt128 : IEquatable<UInt128>, IComparable, IComparable<UInt128>
+#if NETSTANDARD2_0
+    [Serializable]
+#endif
+    public readonly struct UInt128 : IEquatable<UInt128>, IComparable, IComparable<UInt128>
     {
         /// <summary>Gets a value that represents the number 0 (zero).</summary>
         public static readonly UInt128 Zero = new UInt128(0, 0);
@@ -65,7 +68,7 @@ namespace SoftWx.Numerics
                 var mid = lo * hi;
                 hi *= hi;
                 lo *= lo;
-                // mid is 2*lo*hi, but we skipped multiplying by 2 and account for it in the 
+                // mid is 2*lo*hi, but we skipped multiplying by 2 and account for it in the
                 // off by one shifts below so we wouldn't lose data by shifting off a bit doing *2
                 hi += mid >> 31;
                 mid <<= 33;
@@ -475,7 +478,7 @@ namespace SoftWx.Numerics
         /// <summary>Multiplies two specified UInt128 values.</summary>
         /// <param name="left">The first value to multiply.</param>
         /// <param name="right">The second value to multiply.</param>
-        /// <returns>The productof multiplying left and right.</returns>
+        /// <returns>The product of multiplying left and right.</returns>
         public static UInt128 operator *(UInt128 left, UInt128 right)
         {
             var result = Multiply(left.Low, right.Low);
@@ -485,7 +488,7 @@ namespace SoftWx.Numerics
         /// <summary>Multiplies a UInt128 value and a ulong value.</summary>
         /// <param name="left">The first value to multiply.</param>
         /// <param name="right">The second value to multiply.</param>
-        /// <returns>The productof multiplying left and right.</returns>
+        /// <returns>The product of multiplying left and right.</returns>
         public static UInt128 operator *(UInt128 left, ulong right)
         {
             var result = Multiply(left.Low, right);
@@ -495,7 +498,7 @@ namespace SoftWx.Numerics
         /// <summary>Multiplies a ulong value and a UInt128 value.</summary>
         /// <param name="left">The first value to multiply.</param>
         /// <param name="right">The second value to multiply.</param>
-        /// <returns>The productof multiplying left and right.</returns>
+        /// <returns>The product of multiplying left and right.</returns>
         public static UInt128 operator *(ulong left, UInt128 right)
         {
             return right * left;
@@ -575,7 +578,7 @@ namespace SoftWx.Numerics
         }
 
         // denominator must be <= this and > ulong.MaxValue
-        internal ulong Divide(UInt128 denominator)
+        private ulong Divide(UInt128 denominator)
         {
             var remainder = this;
             ulong result = 0;
@@ -592,8 +595,10 @@ namespace SoftWx.Numerics
                         result++;
                         remainder -= denominator;
                     } while (remainder >= denominator);
+
                     return result;
                 }
+
                 ulong resLo;
                 if (denHiBit >= 18 && diff <= 24)
                 {
@@ -618,6 +623,7 @@ namespace SoftWx.Numerics
                             denShift++;
                             den = 1UL << 31;
                         }
+
                         resLo = DivUnchecked(remainder.High, remainder.Low, den);
                         resLo >>= denShift;
                     }
@@ -632,14 +638,16 @@ namespace SoftWx.Numerics
                         resLo = tempResult.Low;
                     }
                 }
+
                 result += resLo;
                 remainder -= denominator * resLo;
             } while (remainder >= denominator);
+
             return result;
         }
 
         // denominator must be > uint.MaxValue
-        internal UInt128 Divide(ulong denominator)
+        private UInt128 Divide(ulong denominator)
         {
             ulong resHi = 0;
             var remHi = High;
@@ -649,6 +657,7 @@ namespace SoftWx.Numerics
                 resHi = remHi / denominator;
                 remHi -= resHi * denominator;
             }
+
             return new UInt128(resHi, DivUnchecked(remHi, Low, denominator));
         }
 
@@ -668,7 +677,7 @@ namespace SoftWx.Numerics
                 {
                     // unwind first few iterations of loop to count leading zero bits but use
                     // bit fiddle if more than 3 to avoid time consuming count when there are
-                    // many leading zero bits. Doing a quick test of the 4 most significant 
+                    // many leading zero bits. Doing a quick test of the 4 most significant
                     // bit positions covers about 94% of possible ulong denominator values.
                     int s;
                     if (denominator >> 62 != 0) s = 1;
@@ -679,6 +688,7 @@ namespace SoftWx.Numerics
                     mid = (high << s) | (low >> (64 - s));
                     shLo = low << s;
                 }
+
                 shLoMid = mid << 32;
                 hiShLo = shLo >> 32;
                 shLoMid += hiShLo;
@@ -698,9 +708,11 @@ namespace SoftWx.Numerics
                         right = (rhat << 32) | hiShLo;
                         left -= denLo;
                     }
+
                     shLoMid -= quotHi * denominator;
                     quotHi <<= 32;
                 }
+
                 quotLo = shLoMid / denHi;
                 rhat = shLoMid - shLoMid / denHi * denHi;
                 right = (rhat << 32) | (uint) shLo;
@@ -713,6 +725,7 @@ namespace SoftWx.Numerics
                     right = (rhat << 32) | (uint) shLo;
                     left -= denLo;
                 }
+
                 return quotHi | quotLo;
             }
         }
@@ -750,8 +763,10 @@ namespace SoftWx.Numerics
                     {
                         remainder -= denominator;
                     } while (remainder >= denominator);
+
                     return remainder;
                 }
+
                 ulong resLo, den;
                 if (denHiBit >= 18 && diff <= 24)
                 {
@@ -776,6 +791,7 @@ namespace SoftWx.Numerics
                             denShift++;
                             den = 1UL << 31;
                         }
+
                         resLo = DivUnchecked(remainder.High, remainder.Low, den);
                         resLo >>= denShift;
                     }
@@ -790,8 +806,10 @@ namespace SoftWx.Numerics
                         resLo = tempResult.Low;
                     }
                 }
+
                 remainder -= denominator * resLo;
             } while (remainder >= denominator);
+
             return remainder;
         }
 
@@ -818,7 +836,7 @@ namespace SoftWx.Numerics
                 {
                     // unwind first few iterations of loop to count leading zero bits but use
                     // bit fiddle if more than 3 to avoid time consuming count when there are
-                    // many leading zero bits. Doing a quick test of the 4 most significant 
+                    // many leading zero bits. Doing a quick test of the 4 most significant
                     // bit positions covers about 94% of possible ulong denominator values.
                     if (denominator >> 62 != 0) shift = 1;
                     else if (denominator >> 61 != 0) shift = 2;
@@ -828,6 +846,7 @@ namespace SoftWx.Numerics
                     mid = (high << shift) | (low >> (64 - shift));
                     shLo = low << shift;
                 }
+
                 shLoMid = mid << 32;
                 hiShLo = shLo >> 32;
                 shLoMid += hiShLo;
@@ -847,8 +866,10 @@ namespace SoftWx.Numerics
                         right = (rhat << 32) | hiShLo;
                         left -= denLo;
                     }
+
                     shLoMid -= quotHi * denominator;
                 }
+
                 quotLo = shLoMid / denHi;
                 rhat = shLoMid - shLoMid / denHi * denHi;
                 right = (rhat << 32) | (uint) shLo;
@@ -861,6 +882,7 @@ namespace SoftWx.Numerics
                     right = (rhat << 32) | (uint) shLo;
                     left -= denLo;
                 }
+
                 return ((shLoMid << 32) + ((uint) shLo - quotLo * denominator)) >> shift;
             }
         }
@@ -880,7 +902,6 @@ namespace SoftWx.Numerics
     }
 
 #if StandaloneUInt128
-
     internal static class SoftWxNumerics
     {
         private static readonly byte[] DeBruijnLsBsSet =
