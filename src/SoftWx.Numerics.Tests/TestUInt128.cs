@@ -11,7 +11,7 @@ namespace SoftWx.Numerics.Tests
 {
     public class UInt128Generator
     {
-        // ReSharper disable once UnusedMember.Local
+        [JetBrains.Annotations.UsedImplicitly]
         public static Arbitrary<UInt128> GenerateUInt128() => Arb.Generate<ulong>()
             .Two()
             .Select(x => new UInt128(x.Item1, x.Item2))
@@ -44,28 +44,11 @@ namespace SoftWx.Numerics.Tests
         [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
         public bool MultiplicationHasOneAsIdentityElement(UInt128 x) => x * UInt128.One == x;
 
-        [FsCheck.NUnit.Property(Arbitrary = new [] {typeof(UInt128Generator)})]
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
         public bool MultiplicationHasZeroAsAnnihilatingElement(UInt128 x) => x * UInt128.Zero == UInt128.Zero;
 
         [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
         public bool TwosComplementShouldWork(UInt128 x) => -x + x == UInt128.Zero;
-
-        [Test]
-        public void Multiply0ShouldReturn0()
-        {
-            Assert.AreEqual(UInt128.Zero, UInt128.Multiply(0, 0));
-            Assert.AreEqual(UInt128.Zero, UInt128.Multiply(0, 1));
-            Assert.AreEqual(UInt128.Zero, UInt128.Multiply(1, 0));
-            Assert.AreEqual(UInt128.Zero, UInt128.Multiply(0, ulong.MaxValue));
-        }
-
-        [Test]
-        public void Multiply1ShouldReturnOther()
-        {
-            Assert.AreEqual(UInt128.One, UInt128.Multiply(1, 1));
-            Assert.AreEqual(new UInt128(0, ulong.MaxValue), UInt128.Multiply(1, ulong.MaxValue));
-            Assert.AreEqual(new UInt128(0, ulong.MaxValue), UInt128.Multiply(ulong.MaxValue, 1));
-        }
 
         [Test]
         public void MultiplyMax()
@@ -73,13 +56,8 @@ namespace SoftWx.Numerics.Tests
             Assert.AreEqual(new UInt128(ulong.MaxValue << 1, 1), UInt128.Multiply(ulong.MaxValue, ulong.MaxValue));
         }
 
-        [Test]
-        public void SquareShouldEqualMultiplySame()
-        {
-            Assert.AreEqual(UInt128.Square(ulong.MaxValue), UInt128.Multiply(ulong.MaxValue, ulong.MaxValue));
-            Assert.AreEqual(UInt128.Square(ulong.MaxValue / 3),
-                UInt128.Multiply(ulong.MaxValue / 3, ulong.MaxValue / 3));
-        }
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool SquareShouldEqualMultiplySame(ulong x) => UInt128.Square(x) == UInt128.Multiply(x, x);
 
         [Test]
         public void RoundTripUlongCastShouldReturnOriginal()

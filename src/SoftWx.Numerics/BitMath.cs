@@ -4,6 +4,12 @@
 
 // ReSharper disable InconsistentNaming
 
+#if NETCOREAPP3_1
+using System.Numerics;
+#endif
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
+
 namespace SoftWx.Numerics
 {
     /// <summary>
@@ -16,6 +22,7 @@ namespace SoftWx.Numerics
     ///     sometimes with minor improvements for C#, and choosing compact
     ///     alternatives that perform well in C# for each data type.
     /// </remarks>
+    [PublicAPI]
     public static class BitMath
     {
         /// <summary>Lookup table for bit position of most significant bit.</summary>
@@ -23,7 +30,7 @@ namespace SoftWx.Numerics
         // msbPos256[0] = 255; // special value for when there are no set bits
         // msbPos256[1] = 0;
         // for (int i = 2; i< 256; i++) msbPos256[i] = (byte)(1 + msbPos256[i / 2]);
-        internal static readonly byte[] msbPos256 =
+        private static readonly byte[] msbPos256 =
         {
             255, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
             5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
@@ -35,7 +42,7 @@ namespace SoftWx.Numerics
             7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7
         };
 
-        internal static readonly byte[] lsbPos256 =
+        private static readonly byte[] lsbPos256 =
         {
             255, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
             5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
@@ -48,7 +55,7 @@ namespace SoftWx.Numerics
         };
 
         // bit position lookup table where all bits zero after most significant bit
-        internal static readonly byte[] DeBruijnMSBSet =
+        private static readonly byte[] DeBruijnMSBSet =
         {
             0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8,
             31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9
@@ -473,15 +480,21 @@ namespace SoftWx.Numerics
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this byte value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.TrailingZeroCount(value);
+#else
             return value != 0 ? lsbPos256[value] : 8;
+#endif
         }
 
         /// <summary>Returns the count of trailing zero bits in the specified value.</summary>
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this sbyte value)
         {
             return TrailingZeroBits((byte) value);
@@ -491,16 +504,22 @@ namespace SoftWx.Numerics
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this ushort value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.TrailingZeroCount(value);
+#else
             var low = (byte) value;
             return low != 0 ? lsbPos256[low] : 8 + TrailingZeroBits((byte) (value >> 8));
+#endif
         }
 
         /// <summary>Returns the count of trailing zero bits in the specified value.</summary>
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this short value)
         {
             return TrailingZeroBits((ushort) value);
@@ -510,17 +529,23 @@ namespace SoftWx.Numerics
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this uint value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.TrailingZeroCount(value);
+#else
             var lowByte = (byte) value;
             if (lowByte != 0) return lsbPos256[lowByte];
             return value != 0 ? DeBruijnMSBSet[unchecked((value & (1u + ~value)) * 0x077cb531u) >> 27] : 32;
+#endif
         }
 
         /// <summary>Returns the count of trailing zero bits in the specified value.</summary>
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this int value)
         {
             return TrailingZeroBits((uint) value);
@@ -530,19 +555,25 @@ namespace SoftWx.Numerics
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this ulong value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.TrailingZeroCount(value);
+#else
             var lowByte = (byte) value;
             if (lowByte != 0) return lsbPos256[lowByte];
             var low = (uint) value;
             if (low != 0) return DeBruijnMSBSet[unchecked((low & (1u + ~low)) * 0x077cb531u) >> 27];
             return 32 + TrailingZeroBits((uint) (value >> 32));
+#endif
         }
 
         /// <summary>Returns the count of trailing zero bits in the specified value.</summary>
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this long value)
         {
             return TrailingZeroBits((ulong) value);
@@ -552,6 +583,7 @@ namespace SoftWx.Numerics
         /// <remarks>Example: TrailingZeroBits(10) returns 1, i.e. 00001010 has 1 trailing 0 bit.</remarks>
         /// <param name="value">The value whose trailing zero bit count is desired.</param>
         /// <returns>The count of the value parameter's trailing zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int TrailingZeroBits(this UInt128 value)
         {
             if (value.Low != 0) return TrailingZeroBits(value.Low);
@@ -562,16 +594,22 @@ namespace SoftWx.Numerics
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this byte value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.LeadingZeroCount(value);
+#else
             // note that (byte)(7 - 255) = 8, so no need to test for value == 0
             return (byte) unchecked(7 - msbPos256[value]);
+#endif
         }
 
         /// <summary>Returns the count of leading zero bits in the specified value.</summary>
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this sbyte value)
         {
             return LeadingZeroBits((byte) value);
@@ -581,15 +619,21 @@ namespace SoftWx.Numerics
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this ushort value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.LeadingZeroCount(value);
+#else
             return unchecked(15 - HighBitPosition(value));
+#endif
         }
 
         /// <summary>Returns the count of leading zero bits in the specified value.</summary>
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this short value)
         {
             return LeadingZeroBits((ushort) value);
@@ -599,15 +643,21 @@ namespace SoftWx.Numerics
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this uint value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.LeadingZeroCount(value);
+#else
             return unchecked(31 - HighBitPosition(value));
+#endif
         }
 
         /// <summary>Returns the count of leading zero bits in the specified value.</summary>
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this int value)
         {
             return LeadingZeroBits((uint) value);
@@ -617,15 +667,21 @@ namespace SoftWx.Numerics
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this ulong value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.LeadingZeroCount(value);
+#else
             return unchecked(63 - HighBitPosition(value));
+#endif
         }
 
         /// <summary>Returns the count of leading zero bits in the specified value.</summary>
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this long value)
         {
             return LeadingZeroBits((ulong) value);
@@ -635,6 +691,7 @@ namespace SoftWx.Numerics
         /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
         /// <param name="value">The value whose leading zero bit count is desired.</param>
         /// <returns>The count of the value parameter's leading zero bits.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int LeadingZeroBits(this UInt128 value)
         {
             return 127 - HighBitPosition(value);
@@ -724,17 +781,16 @@ namespace SoftWx.Numerics
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this byte value)
         {
-            uint v = value;
-            v = v - ((v >> 1) & 0x55u);
-            v = (v & 0x33u) + ((v >> 2) & 0x33u);
-            return (int) ((v + (v >> 4)) & 0x0Fu);
+            return BitCount((uint) value);
         }
 
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this sbyte value)
         {
             return BitCount((byte) value);
@@ -743,6 +799,7 @@ namespace SoftWx.Numerics
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this ushort value)
         {
             return BitCount((uint) value);
@@ -751,6 +808,7 @@ namespace SoftWx.Numerics
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this short value)
         {
             return BitCount((ushort) value);
@@ -759,16 +817,22 @@ namespace SoftWx.Numerics
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this uint value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.PopCount(value);
+#else
             value = value - ((value >> 1) & 0x55555555u);
             value = (value & 0x33333333u) + ((value >> 2) & 0x33333333u);
             return (int) ((((value + (value >> 4)) & 0xF0F0F0Fu) * 0x1010101u) >> (32 - 8));
+#endif
         }
 
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this int value)
         {
             return BitCount((uint) value);
@@ -777,16 +841,22 @@ namespace SoftWx.Numerics
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this ulong value)
         {
+#if NETCOREAPP3_1
+            return BitOperations.PopCount(value);
+#else
             value = value - ((value >> 1) & 0x5555555555555555UL);
             value = (value & 0x3333333333333333UL) + ((value >> 2) & 0x3333333333333333UL);
             return (int) ((((value + (value >> 4)) & 0x0F0F0F0F0F0F0F0FUL) * 0x0101010101010101UL) >> (64 - 8));
+#endif
         }
 
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this long value)
         {
             return BitCount((ulong) value);
@@ -795,6 +865,7 @@ namespace SoftWx.Numerics
         /// <summary>Returns the count of set bits in the specified value.</summary>
         /// <param name="value">The value whose bit count is desired.</param>
         /// <returns>The count of set bits in the specified value.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int BitCount(this UInt128 value)
         {
             return BitCount(value.Low) + BitCount(value.High);

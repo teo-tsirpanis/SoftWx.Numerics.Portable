@@ -25,12 +25,12 @@ namespace SoftWx.Numerics
     public static class PrimeMath
     {
         // precomputed witnesses and the maximum value up to which they guarantee primality
-        private static readonly ulong[] WitnessMaxes =
+        private static readonly ulong[] _witnessMaxes =
         {
             341531, 1050535501, 350269456337, 55245642489451, 7999252175582851, 585226005592931977, ulong.MaxValue
         };
 
-        private static readonly ulong[][] WitnessSets =
+        private static readonly ulong[][] _witnessSets =
         {
             new[] {9345883071009581737}, //341531
             new ulong[] {336781006125, 9639812373923155}, //1050535501
@@ -512,7 +512,7 @@ namespace SoftWx.Numerics
             )
                 return value <= 97;
             // for larger values, use deterministic Miller-Rabin with most efficient witness array for the value being tested
-            return InternalMillerRabin(value, WitnessSets[WitnessIndex(value)]);
+            return InternalMillerRabin(value, _witnessSets[WitnessIndex(value)]);
         }
 
         /// <summary>Determines if the specified value is a prime number.</summary>
@@ -564,7 +564,7 @@ namespace SoftWx.Numerics
                 || value % 149 == 0) return false;
 
             // use deterministic Miller-Rabin with most efficient witness array for the value being tested
-            return InternalMillerRabin(value, WitnessSets[WitnessIndex(value)]);
+            return InternalMillerRabin(value, _witnessSets[WitnessIndex(value)]);
         }
 
         /// <summary>Determines if the specified value is a prime number.</summary>
@@ -717,15 +717,15 @@ namespace SoftWx.Numerics
 
         private static int WitnessIndex(uint value)
         {
-            if (value > WitnessMaxes[1]) return 2;
-            return value > WitnessMaxes[0] ? 1 : 0;
+            if (value > _witnessMaxes[1]) return 2;
+            return value > _witnessMaxes[0] ? 1 : 0;
         }
 
         private static int WitnessIndex(ulong value)
         {
             if (value == (uint) value) return WitnessIndex((uint) value);
-            var i = WitnessMaxes.Length - 1;
-            while (value <= WitnessMaxes[i]) i--;
+            var i = _witnessMaxes.Length - 1;
+            while (value <= _witnessMaxes[i]) i--;
             return i + 1;
         }
 

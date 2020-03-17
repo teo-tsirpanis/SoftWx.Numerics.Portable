@@ -6,14 +6,16 @@
 // comment the #define if UInt128 is used as part of the SoftWx.Numerics library
 
 using System;
+using JetBrains.Annotations;
 
 namespace SoftWx.Numerics
 {
     /// <summary>Represents a 128-bit unsigned integer.</summary>
     /// <remarks>The UInt128 struct is immutable.</remarks>
-#if NETSTANDARD2_0
+#if !NETSTANDARD1_0
     [Serializable]
 #endif
+    [PublicAPI]
     public readonly struct UInt128 : IEquatable<UInt128>, IComparable, IComparable<UInt128>
     {
         /// <summary>Gets a value that represents the number 0 (zero).</summary>
@@ -142,7 +144,7 @@ namespace SoftWx.Numerics
             var loStr = Low.ToString("X");
             if (High == 0) return loStr;
             loStr = new string('0', 64 / 4 - loStr.Length) + loStr;
-            return High.ToString("X") + ' ' + loStr;
+            return string.Concat(High.ToString("X"), " ", loStr);
         }
 
         /// <summary>
@@ -906,77 +908,6 @@ namespace SoftWx.Numerics
             return (uint) (remainder % denominator);
         }
     }
-
-#if StandaloneUInt128
-    internal static class SoftWxNumerics
-    {
-        private static readonly byte[] DeBruijnLsBsSet =
-        {
-            0, 9, 1, 10, 13, 21, 2, 29, 11, 14, 16, 18, 22, 25, 3, 30,
-            8, 12, 20, 28, 15, 17, 24, 7, 19, 27, 23, 6, 26, 5, 4, 31
-        };
-
-        /// <summary>Returns the most significant set bit position of the specified value,
-        /// or -1 if no bits were set. The least significant bit position is 0.</summary>
-        /// <remarks>Example: HighBitPosition(10) returns 3, i.e. high bit of 00001010 is position 3.</remarks>
-        /// <param name="value">The value whose most significant bit position is desired.</param>
-        /// <returns>The value parameter's most significant bit position.</returns>
-        public static int HighBitPosition(this uint value)
-        {
-            if (value == 0) return -1;
-            value |= value >> 1;
-            value |= value >> 2;
-            value |= value >> 4;
-            value |= value >> 8;
-            return DeBruijnLsBsSet[unchecked((value | value >> 16) * 0x07c4acddu) >> 27];
-        }
-
-        /// <summary>Returns the most significant set bit position of the specified value,
-        /// or -1 if no bits were set. The least significant bit position is 0.</summary>
-        /// <remarks>Example: HighBitPosition(10) returns 3, i.e. high bit of 00001010 is position 3.</remarks>
-        /// <param name="value">The value whose most significant bit position is desired.</param>
-        /// <returns>The value parameter's most significant bit position.</returns>
-        public static int HighBitPosition(this ulong value)
-        {
-            uint high = (uint) (value >> 32);
-            return high != 0 ? 32 + HighBitPosition(high) : HighBitPosition((uint) value);
-        }
-
-        /// <summary>Returns the count of leading zero bits in the specified value.</summary>
-        /// <remarks>Example: LeadingZeroBits(10) returns 4, i.e. 00001010 has 4 leading 0 bits.</remarks>
-        /// <param name="value">The value whose leading zero bit count is desired.</param>
-        /// <returns>The count of the value parameter's leading zero bits.</returns>
-        public static int LeadingZeroBits(this uint value)
-        {
-            return unchecked(31 - HighBitPosition(value));
-        }
-
-        /// <summary>Determines if the specified value is a power of 2.</summary>
-        /// <param name="value">The value to be tested as a power of 2.</param>
-        /// <returns>True if the value is a power of 2, otherwise false.</returns>
-        public static bool IsPowerOf2(this uint value)
-        {
-            return (value & unchecked(value - 1)) == 0 && value != 0;
-        }
-
-        /// <summary>Determines if the specified value is a power of 2.</summary>
-        /// <param name="value">The value to be tested as a power of 2.</param>
-        /// <returns>True if the value is a power of 2, otherwise false.</returns>
-        public static bool IsPowerOf2(this ulong value)
-        {
-            return (value & unchecked(value - 1UL)) == 0 && value != 0;
-        }
-
-        /// <summary>Determines if the specified value is a power of 2.</summary>
-        /// <param name="value">The value to be tested as a power of 2.</param>
-        /// <returns>True if the value is a power of 2, otherwise false.</returns>
-        public static bool IsPowerOf2(this UInt128 value)
-        {
-            return (value & value - 1) == 0 && value != 0;
-        }
-    }
-
-#endif
 }
 /*
 Permission is hereby granted, free of charge, to any person obtaining a copy
