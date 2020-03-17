@@ -1,16 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard1.0;netstandard2.0;netstandard2.1;netcoreapp3.1</TargetFrameworks>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>SoftWx.Numerics.Portable</PackageId>
-        <Version>2.5</Version>
+        <Version>2.5.1</Version>
         <Authors>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Authors>
         <Company>Steve Hatchett (Ported to .NET Standard by Theodore Tsirpanis)</Company>
         <Copyright>Copyright © 2013-2017 SoftWx, Inc.</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageTags>SoftWx Prime IsPrime Gcd UInt128 Integer Numeric</PackageTags>
-        <PackageReleaseNotes>2.5: Use optimized implementations of BitMath functions in .NET Core 3.1+ and HashCode.Combine in .NET Core 3.1+ and .NET Standard 2.1+.
+        <PackageReleaseNotes>2.5.1: Remove the JetBrains.Annotations dependency from the NuGet package.
+            2.5: Use optimized implementations of BitMath functions in .NET Core 3.1+ and HashCode.Combine in .NET Core 3.1+ and .NET Standard 2.1+.
             2.4: Made UInt128 a read-only struct and added SourceLink support, among other things.
             2.3: Added two's complement operator on UInt128.
             2.2: Added bitwise xor operator on UInt128.
@@ -38,7 +38,7 @@
     </PropertyGroup>
     <ItemGroup>
         <None Include="../../icon.png" Pack="true" PackagePath="" />
-        <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
+        <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="All" />
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>
 </Project>
