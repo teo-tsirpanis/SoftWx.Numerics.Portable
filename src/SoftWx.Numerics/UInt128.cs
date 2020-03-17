@@ -128,6 +128,9 @@ namespace SoftWx.Numerics
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
+#if NETCOREAPP3_1 || NETSTANDARD2_1
+            return HashCode.Combine(Low, High);
+#else
             unchecked
             {
                 var hash = 17;
@@ -135,6 +138,7 @@ namespace SoftWx.Numerics
                 hash = hash * 31 + High.GetHashCode();
                 return hash;
             }
+#endif
         }
 
         /// <summary>Returns the string representation of this instance.</summary>

@@ -552,14 +552,7 @@ namespace SoftWx.Numerics.Tests {
             Assert.AreEqual(UInt128.One, new UInt128(0x8000000000000000,0).ReverseBits(), "UInt128");
         }
 
-        [Test]
-        public void ReverseBitsByteTwiceShouldReturnOriginal() {
-            byte v = byte.MinValue;
-            while (true) {
-                Assert.AreEqual(v, v.ReverseBits().ReverseBits(), "sbyte");
-                if (v == byte.MaxValue) break;
-                v++;
-            }
-        }
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool ReverseBitsByteTwiceShouldReturnOriginal(UInt128 x) => x.ReverseBits().ReverseBits() == x;
     }
 }

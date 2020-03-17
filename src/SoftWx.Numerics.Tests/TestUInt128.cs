@@ -77,15 +77,8 @@ namespace SoftWx.Numerics.Tests
             Assert.IsFalse(UInt128.Zero == UInt128.One);
         }
 
-        [Test]
-        public void EqualOperatorUInt128ToULong()
-        {
-            Assert.IsTrue(UInt128.Zero == 0UL);
-            Assert.IsTrue(UInt128.One == 1UL);
-            Assert.IsTrue(1UL == UInt128.One);
-            Assert.IsTrue(new UInt128(0, 5678) == 5678);
-            Assert.IsFalse(UInt128.Zero == 1UL);
-        }
+        [FsCheck.NUnit.Property(Arbitrary = new[] {typeof(UInt128Generator)})]
+        public bool EqualOperatorUInt128ToULong(ulong x) => new UInt128(0, x) == x;
 
         [Test]
         public void NotEqualOperatorUInt128ToUInt128()
